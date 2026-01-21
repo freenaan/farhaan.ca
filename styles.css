@@ -1,0 +1,18 @@
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:Rubik,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#ff9a9e 0%,#fad0c4 25%,#fbc2eb 50%,#a18cd1 75%,#fbc2eb 100%);overflow:hidden}
+.wrap{padding:24px;width:100%;max-width:900px}
+.card{background:rgba(255,255,255,0.12);backdrop-filter:blur(6px);border-radius:18px;padding:48px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,0.12);border:1px solid rgba(255,255,255,0.18)}
+h1{font-size:clamp(24px,4vw,40px);color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.25);margin-bottom:12px}
+.message{font-size:clamp(16px,2.5vw,22px);color:#fff;margin-bottom:6px;font-weight:600}
+.sub{color:rgba(255,255,255,0.9)}
+/* confetti pieces */
+.confetti-piece{position:fixed;top:-10vh;width:10px;height:16px;border-radius:2px;opacity:0.95;will-change:transform;animation:fall linear forwards}
+@keyframes fall{0%{transform:translateY(-20vh) rotate(0) }100%{transform:translateY(120vh) rotate(720deg) }}
+/* responsive spacing */
+@media (max-width:520px){.card{padding:30px;border-radius:14px}}
+/* contact corner */
+.contact{position:fixed;top:14px;right:14px;background:rgba(255,255,255,0.12);backdrop-filter:blur(6px);padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.18);color:#fff;font-size:13px;text-align:right;z-index:60}
+.contact a{color:#fff;text-decoration:underline;margin-left:8px}
+.contact .contact-links{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+@media (max-width:520px){.contact{right:10px;left:10px;top:10px;text-align:left;display:flex;justify-content:space-between;align-items:center}}
