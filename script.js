@@ -1,20 +1,55 @@
-(function(){
-  const colors = ['#FF6B6B','#FFD93D','#6BCB77','#4D96FF','#9B5DE5','#F15BB5']
-  const count = 40
-  for(let i=0;i<count;i++){
-    const el = document.createElement('div')
-    el.className = 'confetti-piece'
-    const size = Math.floor(Math.random()*12)+8
-    el.style.width = size + 'px'
-    el.style.height = Math.floor(size*1.4)+'px'
-    el.style.left = Math.random()*100 + 'vw'
-    el.style.background = colors[Math.floor(Math.random()*colors.length)]
-    const duration = 3000 + Math.random()*3000
-    el.style.animationDuration = duration + 'ms'
-    el.style.opacity = 0.9 + Math.random()*0.1
-    el.style.transform = `rotate(${Math.floor(Math.random()*360)}deg)`
-    document.body.appendChild(el)
-    // remove after finished
-    setTimeout(()=>el.remove(), duration+100)
+// Image placeholder preview: click a placeholder to select an image
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.proj-item').forEach(item => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.style.display = 'none';
+    item.appendChild(input);
+
+    item.addEventListener('click', () => input.click());
+
+    input.addEventListener('change', (e) => {
+      const f = e.target.files && e.target.files[0];
+      if (!f) return;
+      const img = item.querySelector('img');
+      img.src = URL.createObjectURL(f);
+      img.onload = () => URL.revokeObjectURL(img.src);
+      item.classList.add('filled');
+    });
+  });
+  
+  // Starfield generator (creates box-shadow strings for many stars)
+  function generateShadows(count, width, height) {
+    const parts = [];
+    for (let i = 0; i < count; i++) {
+      const x = Math.floor(Math.random() * width);
+      const y = Math.floor(Math.random() * height);
+      parts.push(`${x}px ${y}px #FFF`);
+    }
+    return parts.join(', ');
   }
-})();
+
+  // Setup star layers after small delay so CSS sizes are settled
+  function setupStars() {
+    const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + 2000;
+
+    const s1 = document.getElementById('stars');
+    const s2 = document.getElementById('stars2');
+    const s3 = document.getElementById('stars3');
+    if (s1) { s1.style.boxShadow = generateShadows(500, w, h); s1.style.width = '1px'; s1.style.height = '1px'; }
+    if (s2) { s2.style.boxShadow = generateShadows(200, w, h); s2.style.width = '2px'; s2.style.height = '2px'; }
+    if (s3) { s3.style.boxShadow = generateShadows(100, w, h); s3.style.width = '3px'; s3.style.height = '3px'; }
+  }
+
+  // Debounced resize handling so stars always cover the full viewport
+  let _resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(_resizeTimer);
+    _resizeTimer = setTimeout(setupStars, 150);
+  });
+
+  // initial setup shortly after load
+  setTimeout(setupStars, 50);
+});

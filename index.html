@@ -1,26 +1,76 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Site Under Construction</title>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>farhaan.ca</title>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Permanent+Marker&family=Bungee:wght@400;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="contact">
-    <strong>Farhaan Khan</strong>
-    <div class="contact-links">
-      <a href="https://www.linkedin.com/in/farhaan-k" target="_blank" rel="noopener">LinkedIn</a>
-    </div>
-  </div>
-  <main class="wrap">
-    <div class="card">
-      <h1>Almost there!</h1>
-      <p class="message">The website is in development, please come back later.</p>
-      <p class="sub">Thanks for your patience 💖</p>
-    </div>
-  </main>
-  <script src="script.js"></script>
+	<!-- starfield layers (generated shadows) -->
+	<div id="stars" aria-hidden="true"></div>
+	<div id="stars2" aria-hidden="true"></div>
+	<div id="stars3" aria-hidden="true"></div>
+	<header class="site-header">
+		<div class="site-inner">
+			<div class="brand"><a href="#">Farhaan.ca</a></div>
+			<nav class="nav">
+				<a class="btn" href="#projects">Projects</a>
+				<a class="btn" href="#contact">Contact</a>
+			</nav>
+		</div>
+	</header>
+
+	<main class="main">
+		<section class="hero">
+			<h1 class="hero-title">How's it going?</h1>
+		</section>
+
+		<section id="about" class="about">
+			<h2>About me</h2>
+			<div class="about-box">
+				<p>I study Mechatronics Engineering at uWaterloo. I like building robots, embedded systems, and playful things — replace this with your own bio.</p>
+			</div>
+		</section>
+
+		<section id="projects" class="projects">
+			<div class="projects-inner">
+				<h2>My stuff</h2>
+				<div class="proj-grid">
+					<div class="proj-container">
+						<div class="proj-item"><img alt="3-Speed Planetary Transmission"/></div>
+						<a href="#" class="proj-label">3-Speed Planetary Transmission</a>
+					</div>
+					<div class="proj-container">
+						<div class="proj-item"><img alt="Shaurya the Sumobot"/></div>
+						<a href="#" class="proj-label">Shaurya the Sumobot</a>
+					</div>
+					<div class="proj-container">
+						<div class="proj-item"><img alt="8-Bit Calculator"/></div>
+						<a href="#" class="proj-label">8-Bit Calculator</a>
+					</div>
+					<div class="proj-container">
+						<div class="proj-item"><img alt="IoT Enabled Smart Clothesline"/></div>
+						<a href="#" class="proj-label">IoT Enabled Smart Clothesline</a>
+					</div>
+					<div class="proj-container">
+						<div class="proj-item"><img alt="TKOM"/></div>
+						<a href="#" class="proj-label">TKOM</a>
+					</div>
+					<div class="proj-container">
+						<div class="proj-item"><img alt="Infinite Loop Basketball Robot"/></div>
+						<a href="#" class="proj-label">Infinite Loop Basketball Robot</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<script src="script.js"></script>
 </body>
 </html>
+
