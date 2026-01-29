@@ -5,6 +5,7 @@ body {
 
 body {
     font-family: Nunito, system-ui, 'Segoe UI', Roboto, Arial;
+	margin: 0;
     background: linear-gradient(180deg, #000000 0%, #121212 100%);
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -104,7 +105,7 @@ body {
 }
 
 .hero {
-	padding: 120px 12px 28px;
+	padding: 60px 12px 28px;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
@@ -138,9 +139,8 @@ body {
 	line-height: 1.55;
 	letter-spacing: 0.3px;
 	color: #fff;
-	margin: 40px auto 4px;
-		padding: 0 7vw;
-	box-sizing: border-box;
+	margin: 0 auto;
+	padding: 0 7vw; /* only horizontal padding on paragraph; vertical space comes from container */
 }
 
 .projects {
@@ -234,39 +234,62 @@ body {
 
 /* Centered panel that holds About + Projects; semi-opaque so stars stay visible at page sides */
 .panel {
-	/* full-viewport width (was constrained by .main). center via left+translate */
+	/* span the full viewport so stars at page edges are covered */
 	width: 100vw;
-	left: 50%;
-	transform: translateX(-50%);
+	left: 0;
+	transform: none;
 	margin: 24px 0;
 	background: #1e1e1f;
 	padding: 28px;
-	border-radius: 12px;
-	box-shadow: 0 6px 30px rgba(0,0,0,0.45);
 	position: relative;
 	z-index: 20;
+	box-sizing: border-box;
 }
 
 /* constrain the panel's inner content while keeping full-bleed background */
 .panel-inner {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 0 16px;
+
 }
 
-/* make the about-box span the full viewport while centering its inner text */
-	.panel .about-box {
-	width: 100vw;
-	margin-left: 50%;
+/* full-bleed about area: spans viewport width and at least viewport height
+   Holds the animated, pointer-reactive background so it covers the full page width */
+.panel .about-box {
+	width: 100%;
+	left: 50%;
 	transform: translateX(-50%);
-	/* pull up by panel padding (28px) so top edges align */
-	margin-top: -28px;
-	/* keep the box tall via min-height, avoid large bottom padding that creates gap */
-	min-height: 660px;
-	padding: 18px;
-	background: #171717; /* darker than .panel (#1e1e1f) */
-	border-radius: 0;
+	margin: 0;
+	padding: 160px 0; /* vertical breathing room around text */
+	min-height: 100vh; /* ensure it spans viewport height */
+	background: #171717;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 5;
+
+	/* animated, pointer-reactive layered background (uses --posX/--posY set on body) */
+	--x: calc(var(--posX, 0) * 1px);
+	--y: calc(var(--posY, 0) * 1px);
+	background-image: 
+		linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
+		radial-gradient(90% 100% at calc(50% + var(--x)) calc(0% + var(--y)), rgb(200 200 200), rgb(22 0 45)),
+		radial-gradient(100% 100% at calc(80% - var(--x)) calc(0% - var(--y)), rgb(250 255 0), rgb(36 0 0)),
+		radial-gradient(150% 210% at calc(100% + var(--x)) calc(0% + var(--y)), rgb(20 175 125), rgb(0 10 255)),
+		radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 77 0), rgb(0 200 255)),
+		linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
+	background-blend-mode: overlay, overlay, difference, difference, difference, normal;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center top;
+}
+
+@media (max-width: 720px) {
+	.panel .about-box {
+		padding: 80px 0;
+		min-height: 60vh;
 	}
+}
+
 
 /* Starfield layers (positioned behind content) */
 #stars,
