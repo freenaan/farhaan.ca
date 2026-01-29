@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Russo+One&display=swap');
+
+/* Base for project pages (distinct from main landing) */
+body {
+  background: #fff;
+  font-family: 'Comfortaa', sans-serif;
+  position: relative;
+  color: #111;
+}
+
+
+/* Full-viewport hero image */
+.project-hero {
+  /* background feature behaviour: large initial zoom, fixed, fades/zooms on scroll */
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: 250%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 0;
+  color: #fff;
+  text-align: center;
+  -webkit-box-shadow: 0 -50px 20px -20px #232323 inset;
+     -moz-box-shadow: 0 -50px 20px -20px #232323 inset;
+          box-shadow: 0 -50px 20px -20px #232323 inset;
+}
+
+/* copy of the main site's top purple overlay (sits above the image but behind header content) */
+.project-hero::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -175px;
+  height: 350px;
+  background: linear-gradient(180deg, rgba(139,92,246,0.72) 0%, rgba(0,0,0,0) 100%);
+  filter: blur(10px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* position the site header elements inside the hero image */
+.project-hero .site-inner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.project-hero .site-inner .brand { margin-right: auto; }
+.project-hero .site-inner .nav { margin-left: auto; }
+
+.project-hero h1 {
+  position: relative;
+  z-index: 2;
+  font-weight: 700;
+  font-size: clamp(36px, 6vw, 64px);
+  letter-spacing: 1px;
+  margin: 0;
+  transition: opacity 200ms linear, transform 200ms linear;
+}
+
+/* match landing header font + button styles */
+.project-hero .brand a {
+  font-family: 'Archivo Black', 'Russo One', sans-serif;
+  font-size: 34px;
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  padding: 6px 10px;
+  /* sharp bottom-left drop shadow (no blur) */
+  text-shadow: 2px 2px 0 #000;
+  position: relative;
+  transition: transform 180ms cubic-bezier(.2, .8, .2, 1), box-shadow 180ms;
+  transform-origin: center;
+}
+
+.project-hero .nav .btn {
+  background: #ffffff;
+  border: 3px solid #222;
+  padding: 8px 12px;
+  margin-left: 0;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #222;
+  font-weight: 700;
+  box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.18);
+  transition: transform 180ms cubic-bezier(.2, .8, .2, 1), box-shadow 180ms;
+  transform-origin: center;
+  display: inline-block;
+}
+
+/* improve readability: dark outline + subtle translucent background behind title */
+.project-hero h1 {
+  text-shadow:
+    0 1px 0 rgba(0,0,0,0.95),
+    0 -1px 0 rgba(0,0,0,0.95),
+    1px 0 0 rgba(0,0,0,0.95),
+    -1px 0 0 rgba(0,0,0,0.95),
+    1px 1px 6px rgba(0,0,0,0.6);
+  background: rgba(28,28,30,0.45);
+  padding: 0.28em 0.6em;
+  display: inline-block;
+}
+
+/* opaque overlay used for non-Chrome/Safari browsers */
+.opaque { position: absolute; top:0; left:0; right:0; bottom:0; opacity:0; background:#d2d6f1; pointer-events:none; }
+
+/* ensure page content flows above the fixed hero */
+.project-content { margin-top: 100vh; position: relative; z-index: 1; }
+
+
+/* Content area beneath hero */
+.project-content {
+  background: #1e1e1f;
+  color: #fff;
+  padding: 48px 20px;
+  /* ensure the grey content panel fills the viewport below the fixed hero */
+  min-height: 100vh;
+}
+.project-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.project-summary {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 24px;
+  align-items: start;
+}
+.project-summary p { color: #ddd; line-height: 1.6; }
+
+.thumbs {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+.thumb {
+  background: #2a2a2d;
+  padding: 6px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex: 1;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; display:block; }
+
+/* Responsive */
+@media (max-width: 900px){
+  .project-summary { grid-template-columns: 1fr; }
+  .thumbs { flex-direction: column; }
+}
+
+/* Footer placeholder to mirror landing vibe */
+.project-footer{ text-align:center; padding:24px 0; color:#bbb; }
+
