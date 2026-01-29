@@ -34,50 +34,55 @@
 			<h2>About me</h2>
 		</section>
 
-		<!-- Centered grey panel containing About box and Projects (stars remain visible on page sides) -->
-		<div class="panel">
-			<div class="panel-inner">
-				<div class="about-box">
-					<p>Hey there, I’m Farhaan and I study Mechatronics Engineering at the University of Waterloo. My current interests are embedded systems and 3D CAD. I love thinking outside the box with creative (and occasionally janky) solutions to problems I see around me. I’m also into powerlifting, I’ve been training for the past 2 years and hope to attend my first meet sometime soon. Feel free to send me a message if you wanna chat!</p>
-				</div>
-
-				<section id="projects" class="projects">
-					<div class="projects-inner">
-						<h2>My Stuff:</h2>
-						<div class="proj-grid">
-						<div class="proj-container">
-						<div class="proj-item"><img alt="3-Speed Planetary Transmission"/></div>
-						<a href="projects/planetary-transmission.html" class="proj-label">3-Speed Planetary Transmission</a>
-					</div>
-					<div class="proj-container">
-						<div class="proj-item"><img alt="Shaurya the Sumobot"/></div>
-						<a href="projects/shaurya-sumobot.html" class="proj-label">Shaurya the Sumobot</a>
-					</div>
-					<div class="proj-container">
-						<div class="proj-item"><img alt="8-Bit Calculator"/></div>
-						<a href="projects/8-bit-calculator.html" class="proj-label">8-Bit Calculator</a>
-					</div>
-					<div class="proj-container">
-						<div class="proj-item"><img alt="IoT Enabled Smart Clothesline"/></div>
-						<a href="projects/smart-clothesline.html" class="proj-label">IoT Enabled Smart Clothesline</a>
-					</div>
-					<div class="proj-container">
-						<div class="proj-item"><img alt="TKOM"/></div>
-						<a href="projects/tkom.html" class="proj-label">TKOM</a>
-					</div>
-					<div class="proj-container">
-						<div class="proj-item"><img alt="Infinite Loop Basketball Robot"/></div>
-						<a href="projects/basketball-robot.html" class="proj-label">Infinite Loop Basketball Robot</a>
-					</div>
-					</div>
-					</div>
-				</section>
-			</div>
-		</div>
-
-	</main>
+		</main>
 
 	<script src="script.js"></script>
 </body>
+	<!-- Moved .panel here so it can be full-bleed and independent of .main -->
+	<!-- About box moved out here so it can be its own independent block -->
+	<div class="about-box">
+		<p>Hi there, I’m Farhaan and I study Mechatronics Engineering at the University of Waterloo. 
+			My current interests are embedded systems and 3D CAD. I love thinking outside the box 
+			with creative (and occasionally janky) solutions to problems I see around me. I’m also 
+			into powerlifting, I’ve been training for the past 2 years and hope to attend my first 
+			meet sometime soon. Feel free to send me a message if you wanna chat!</p>
+	</div>
+
+	<div class="panel">
+		<div class="panel-inner">
+
+			<section id="projects" class="projects">
+				<div class="projects-inner">
+					<h2>My Stuff:</h2>
+					<div class="proj-grid">
+					<div class="proj-container">
+					<div class="proj-item"><img alt="3-Speed Planetary Transmission"/></div>
+					<a href="projects/planetary-transmission.html" class="proj-label">3-Speed Planetary Transmission</a>
+				</div>
+				<div class="proj-container">
+					<div class="proj-item"><img alt="Shaurya the Sumobot"/></div>
+					<a href="projects/shaurya-sumobot.html" class="proj-label">Shaurya the Sumobot</a>
+				</div>
+				<div class="proj-container">
+					<div class="proj-item"><img alt="8-Bit Calculator"/></div>
+					<a href="projects/8-bit-calculator.html" class="proj-label">8-Bit Calculator</a>
+				</div>
+				<div class="proj-container">
+					<div class="proj-item"><img alt="IoT Enabled Smart Clothesline"/></div>
+					<a href="projects/smart-clothesline.html" class="proj-label">IoT Enabled Smart Clothesline</a>
+				</div>
+				<div class="proj-container">
+					<div class="proj-item"><img alt="TKOM"/></div>
+					<a href="projects/tkom.html" class="proj-label">TKOM</a>
+				</div>
+				<div class="proj-container">
+					<div class="proj-item"><img alt="Infinite Loop Basketball Robot"/></div>
+					<a href="projects/basketball-robot.html" class="proj-label">Infinite Loop Basketball Robot</a>
+				</div>
+				</div>
+				</div>
+			</section>
+		</div>
+	</div>
 </html>
 

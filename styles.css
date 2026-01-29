@@ -134,19 +134,47 @@ body {
 	margin-bottom: 10px;
 }
 
+.about-box {
+	/* expand horizontally to visually align with viewport edges */
+	width: calc(100% + 56px);
+	left: 50%;
+	transform: translateX(-50%);
+	margin: -28px -28px; /* vertical and horizontal negative margins to offset parent padding */
+	padding: 60px 0; /* vertical breathing room around text */
+	min-height: 60vh; /* ensure it spans viewport height */
+	background: #171717;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 5;
+
+	/* animated, pointer-reactive layered background (uses --posX/--posY set on body) */
+	--x: calc(var(--posX, 0) * 1px);
+	--y: calc(var(--posY, 0) * 1px);
+	background-image: 
+		linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
+		radial-gradient(90% 100% at calc(50% + var(--x)) calc(0% + var(--y)), rgb(200 200 200), rgb(22 0 45)),
+		radial-gradient(100% 100% at calc(80% - var(--x)) calc(0% - var(--y)), rgb(250 255 0), rgb(36 0 0)),
+		radial-gradient(150% 210% at calc(100% + var(--x)) calc(0% + var(--y)), rgb(20 175 125), rgb(0 10 255)),
+		radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 77 0), rgb(0 200 255)),
+		linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
+	background-blend-mode: overlay, overlay, difference, difference, difference, normal;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center top;
+}
+
+/* Typography for the about text */
 .about-box p {
-	font-size: 32px; /* roughly twice the previous size */
+	font-size: 32px;
 	line-height: 1.55;
 	letter-spacing: 0.3px;
 	color: #fff;
 	margin: 0 auto;
-	padding: 0 7vw; /* only horizontal padding on paragraph; vertical space comes from container */
+	padding: 0 7vw;
+	max-width: 1000px;
 }
 
-.projects {
-	margin-top: 28px;
-}
-
+/* Projects heading styling ("My Stuff") */
 .projects h2 {
 	font-family: 'Russo One', Nunito, system-ui, 'Segoe UI', Roboto, Arial;
 	font-weight: 700;
@@ -234,11 +262,10 @@ body {
 
 /* Centered panel that holds About + Projects; semi-opaque so stars stay visible at page sides */
 .panel {
-	/* span the full viewport so stars at page edges are covered */
-	width: 100vw;
-	left: 0;
-	transform: none;
-	margin: 24px 0;
+	/* use flex to center content horizontally and vertically */
+	width: 100%;
+	justify-content: center; /* Centers horizontally */
+	align-items: center;     /* Centers vertically */
 	background: #1e1e1f;
 	padding: 28px;
 	position: relative;
@@ -253,42 +280,6 @@ body {
 
 }
 
-/* full-bleed about area: spans viewport width and at least viewport height
-   Holds the animated, pointer-reactive background so it covers the full page width */
-.panel .about-box {
-	width: 100%;
-	left: 50%;
-	transform: translateX(-50%);
-	margin: 0;
-	padding: 160px 0; /* vertical breathing room around text */
-	min-height: 100vh; /* ensure it spans viewport height */
-	background: #171717;
-	box-sizing: border-box;
-	position: relative;
-	z-index: 5;
-
-	/* animated, pointer-reactive layered background (uses --posX/--posY set on body) */
-	--x: calc(var(--posX, 0) * 1px);
-	--y: calc(var(--posY, 0) * 1px);
-	background-image: 
-		linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
-		radial-gradient(90% 100% at calc(50% + var(--x)) calc(0% + var(--y)), rgb(200 200 200), rgb(22 0 45)),
-		radial-gradient(100% 100% at calc(80% - var(--x)) calc(0% - var(--y)), rgb(250 255 0), rgb(36 0 0)),
-		radial-gradient(150% 210% at calc(100% + var(--x)) calc(0% + var(--y)), rgb(20 175 125), rgb(0 10 255)),
-		radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 77 0), rgb(0 200 255)),
-		linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
-	background-blend-mode: overlay, overlay, difference, difference, difference, normal;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center top;
-}
-
-@media (max-width: 720px) {
-	.panel .about-box {
-		padding: 80px 0;
-		min-height: 60vh;
-	}
-}
 
 
 /* Starfield layers (positioned behind content) */
