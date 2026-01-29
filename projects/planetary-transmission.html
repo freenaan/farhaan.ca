@@ -21,27 +21,35 @@
 
     <section class="project-content">
       <div class="project-inner">
-        <div class="project-summary">
-          <div>
-            <h2>Overview</h2>
-            <p>This project documents a compact 3-speed planetary transmission I designed and prototyped. It focuses on efficient gear-train layout, ease of shifting and robust torque transfer for small-vehicle applications.</p>
-            <p>The page includes detailed CAD renders, build notes, and performance testing results. The design choices prioritize manufacturability and compact packaging.</p>
-
-            <div class="thumbs">
-              <div class="thumb"><img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=800&q=60" alt="thumb1"></div>
-              <div class="thumb"><img src="https://images.unsplash.com/photo-1581091870629-3c8f9c8a6d4d?auto=format&fit=crop&w=800&q=60" alt="thumb2"></div>
-              <div class="thumb"><img src="https://images.unsplash.com/photo-1581092335878-0b8d9a5a4b77?auto=format&fit=crop&w=800&q=60" alt="thumb3"></div>
+        <div class="feature-list">
+          <div class="feature-card">
+            <div class="feature-text">
+              <h3>Overview</h3>
+              <p>With normal gears, cars only get two choices; fast acceleration, or high top speed. Transmissions fix this by offering multiple gear ratios to choose from, but they’re usually made of metal and thus, outside the scope of most DIY’ers.</p>
+              <p>With my transmission I am to change this. This is a 3D printed, clutchless, high performance planetary transmission. It can be made economically with just a 3d printer, some heated inserts, screws, bearings, and metal dowel pins. And it’s quite strong too.</p>
             </div>
+            <div class="feature-media"><img src="../planetary1.png" alt="Planetary transmission"></div>
           </div>
 
-          <aside>
-            <h3>Quick Facts</h3>
-            <ul>
-              <li>Type: Planetary gearset</li>
-              <li>Speeds: 3</li>
-              <li>Materials: Steel & aluminium</li>
-            </ul>
-          </aside>
+          <div class="feature-card reverse">
+            <div class="feature-text">
+              <h3>Design Notes</h3>
+              <p>The layout balances manufacturability and packaging. Bearings, carriers, and ring gear constraints were optimized for strength while keeping the assembly compact.</p>
+            </div>
+            <div class="feature-media"><span>Image</span></div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-text">
+              <h3>Custom shifter</h3>
+              <p>It’s no secret that 3D printed plastics soften with little heat, that’s why they’re 3D printable in the first place. This is bad since traditional planetary transmissions use friction clutches as couplers, which encounter frequent “micro-slips” from torque spikes that arise from torque spikes.</p>
+              </br>
+              <p>This issue is combatted by a custom “spline-clutch” mechanism that holds ring gears in place with splines attached to a sliding outer shell. The coupler between the blue components and driving shaft required for direct drive has also been replaced by a rotationally independent spline coupler that’s axially connected to the sliding shell with a ball bearing.</p>
+              </br>
+              <p>E<sub>Heat</sub> = F<sub>Friction</sub> * &Delta;d, so by reducing &Delta;d through the elimination of micro slips, heat generation is greatly reduced. This theoretically reduces total deformation by 90+%, greatly extending the life of the transmission and enabling its usage with stronger engines.</p>
+            </div>
+            <div class="feature-media"><span>Image</span></div>
+          </div>
         </div>
 
         <div class="project-footer">© Farhaan Khan 2026</div>
