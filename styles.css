@@ -1,6 +1,37 @@
+/*
+	styles.css - top-level guide
+
+	This file contains the global styles and layout rules for the site. Below
+	is a short reference describing the purpose of each major selector used in
+	the stylesheet so you (and future debuggers) can quickly find what to edit.
+
+	Selector quick-reference:
+	- html, body: base sizing so 100vh calculations and full-height elements work.
+	- body: global font, background, and smoothing; overall page background.
+	- .site-header: fixed top navigation bar (logo + primary links).
+	- .site-inner: horizontal container inside the header used to align brand/nav.
+	- .brand / .brand a: site name styling and hover effect.
+	- .nav .btn: header buttons (Projects / Contact) visual style.
+	- .main: main page container (centers content and provides global margins).
+	- .hero: top section that holds the large intro heading.
+	- .hero-title: the big "How's it going?" heading (font-size + spacing).
+	- .about / .about h2: the About section heading and spacing rules.
+	- .about-box: full-bleed, animated background box that holds about text.
+	- .about-box p: typography for the about paragraph text.
+	- .panel / .panel-inner: the centered panel that contains Projects + other blocks.
+	- .projects, .proj-grid, .proj-container, .proj-item, .proj-label: project grid and items.
+	- .contact / .contact-box / .link: contact area and link/button styling.
+	- #stars, #stars2, #stars3: starfield background layers (fixed, behind content).
+	- media queries: responsive adjustments for small screens (e.g., project grid).
+
+	If you want more granular inline comments for any specific block, tell me which
+	selector(s) and I'll add a short explanation immediately above them.
+*/
+
+/* Base: allow full-height calculations (used by 100vh/min-height rules) */
 html,
 body {
-    height: 100%;
+	height: 100%;
 }
 
 body {
@@ -14,6 +45,8 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Page shell: fonts, background gradient and global text colour */
+
 .site-header {
 	position: fixed;
 	left: 0;
@@ -26,6 +59,8 @@ body {
 	background: transparent;
 }
 
+/* Top navigation bar: fixed to top, holds brand + nav buttons */
+
 .site-inner {
 	width: 100%;
 	padding: 10px 40px;
@@ -36,9 +71,13 @@ body {
 	z-index: 2;
 }
 
+/* Header inner container: aligns brand left and nav right */
+
 .brand {
 	margin-right: auto;
 }
+
+/* Brand container: holds site title/link */
 
 .brand a {
 	font-family: 'Archivo Black', 'Russo One', sans-serif;
@@ -52,6 +91,8 @@ body {
 	transition: transform 180ms cubic-bezier(.2, .8, .2, 1), box-shadow 180ms;
 	transform-origin: center;
 }
+
+/* Clickable site title styling and hover lift */
 
 .nav .btn {
 	background: #ffffff;
@@ -67,6 +108,8 @@ body {
 	transform-origin: center;
 	display: inline-block;
 }
+
+/* Header buttons (Projects, Contact) visual style */
 
 /* subtle lift/scale on hover */
 .brand a:hover {
@@ -104,6 +147,8 @@ body {
 	padding: 20px;
 }
 
+/* Main content wrapper: centers page sections and provides outer margins */
+
 .hero {
 	padding: 60px 12px 28px;
 	text-align: center;
@@ -114,6 +159,8 @@ body {
 	min-height: 100vh;
 }
 
+/* Top hero section: holds the large intro heading */
+
 .hero-title {
 	font-family: 'Archivo Black', 'Russo One', Nunito, system-ui, 'Segoe UI', Roboto, Arial;
 	font-weight: 700;
@@ -122,9 +169,13 @@ body {
 	margin-bottom: 6px;
 }
 
+/* The big "How's it going?" heading — responsive size with clamp() */
+
 .about {
 	margin-top: 28px;
 }
+
+/* About section container */
 
 .about h2 {
 	font-family: 'Archivo Black', 'Russo One', Nunito, system-ui, 'Segoe UI', Roboto, Arial;
@@ -133,6 +184,8 @@ body {
 	color: #fff;
 	margin-bottom: 10px;
 }
+
+/* About heading style */
 
 .about-box {
 	/* expand horizontally to visually align with viewport edges */
@@ -184,17 +237,23 @@ body {
 	margin-bottom: 12px;
 }
 
+/* Projects list and grid */
+
 .proj-grid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 18px;
 }
 
+/* Individual project container */
+
 .proj-container {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
 }
+
+/* Project thumbnail frame */
 
 .proj-item {
 	background: transparent;
@@ -210,12 +269,16 @@ body {
 	box-shadow: 18px 22px 0 rgba(0, 0, 0, 0.12);
 }
 
+/* Project images fill their frames */
+
 .proj-item img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 	display: block;
 }
+
+/* Project label/link under each thumbnail */
 
 .proj-label {
 	font-family: Nunito, system-ui, 'Segoe UI', Roboto, Arial;
@@ -229,15 +292,21 @@ body {
 	display: block;
 }
 
+/* Contact area */
+
 .contact {
 	margin-top: 28px;
 }
+
+/* Contact container layout */
 
 .contact-box {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
 }
+
+/* Generic button/link style used in header and contact */
 
 .link {
 	display: inline-block;
@@ -261,6 +330,8 @@ body {
 	}
 }
 
+/* Panel that holds About + Projects; gives a semi-opaque background */
+
 /* Centered panel that holds About + Projects; semi-opaque so stars stay visible at page sides */
 .panel {
 	/* use flex to center content horizontally and vertically */
@@ -281,6 +352,8 @@ body {
 
 }
 
+/* Constrain inner content width while keeping full-bleed panel */
+
 
 
 /* Starfield layers (positioned behind content) */
@@ -300,6 +373,8 @@ body {
 	contain: paint;
 	backface-visibility: hidden;
 }
+
+/* Individual star layers (small/medium/large) are defined below */
 
 #stars {
 	width: 1px;
@@ -362,12 +437,85 @@ body {
 	}
 }
 
+/* Ensure header and main content render above the star layers */
+
 /* ensure page content appears above the stars */
 .site-header,
 .main {
 	position: relative;
 	z-index: 10;
 }
+
+/* Contact form styles (scoped) - base provided by user but adapted for dark/starry theme */
+.contact-container {
+		border-radius: 8px;
+		background-color: rgba(23, 24, 27, 0.72); /* translucent dark so stars remain visible */
+		padding: 28px;
+		max-width: 760px;
+		margin: 0 auto;
+		box-sizing: border-box;
+		color: #fff;
+		border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Style email input and textarea */
+.contact-container input[type=email],
+.contact-container textarea {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #444;
+	border-radius: 4px;
+	box-sizing: border-box;
+	margin-top: 6px;
+	margin-bottom: 16px;
+	background: #1c1c1c;
+	color: #fff;
+	font-size: 16px;
+	resize: vertical; /* allow vertical resize only */
+}
+
+/* style <button> fallback used in the simplified template */
+.contact-container button {
+	background-color: #04AA6D;
+	color: white;
+	padding: 12px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.contact-container button:hover {
+	background-color: #45a049;
+}
+
+/* Labels */
+.contact-container label {
+	display: block;
+	font-weight: 700;
+	margin-bottom: 6px;
+	color: #e6e6e6;
+}
+
+/* Make sure the panel keeps some vertical breathing room on contact page */
+/* (removed: contact page uses no outer .panel wrapper now) */
+
+/* Contact page overrides: smaller header and tighter spacing so the form sits just below the title */
+.contact-page .main {
+	margin-top: 40px; /* reduce top offset on contact page */
+}
+.contact-page .hero {
+	padding: 10px 12px 6px; /* much smaller vertical padding */
+	min-height: auto; /* allow hero to size to content */
+}
+.contact-page .hero-title {
+	/* Slightly larger and nudged up */
+	font-size: clamp(22px, 5vw, 42px);
+	margin-top: 4px;
+	margin-bottom: 12px;
+	font-weight: 700;
+}
+/* contact-page no longer uses .panel wrapper */
 
 .site-header::after{
 	/* top-centered purple overlay: half above viewport, shorter and stronger */
@@ -382,6 +530,8 @@ body {
 	pointer-events:none;
 	z-index:1;
 }
+
+/* Decorative overlay behind the header */
 
 /* (cleaned) headings/font stacks are defined where needed above */
 
