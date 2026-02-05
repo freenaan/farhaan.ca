@@ -67,13 +67,25 @@ body {
 /* Top navigation bar: fixed to top, holds brand + nav buttons */
 
 .site-inner {
-	width: 100%;
+	width: 100vw;
 	padding: 10px 40px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
 	position: relative;
 	z-index: 2;
+
+	min-width: 0; /* 🔑 allow flex container to shrink */
+}
+
+.site-inner > * {
+	min-width: 0;
+}
+
+.nav {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 }
 
 /* Header inner container: aligns brand left and nav right */
@@ -147,7 +159,6 @@ body {
 }
 
 .main {
-	max-width: 1100px;
 	margin: 120px auto 80px;
 	padding: 20px;
 }
@@ -193,19 +204,20 @@ body {
 /* About heading style */
 
 .about-box {
-	margin-left: calc(50% - 50vw);
-	margin-right: calc(50% - 50vw);
+	width: 100vw;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
 
 	padding: 60px 0;
-	min-height: 60vh;
 
 	background: #171717;
 	box-sizing: border-box;
-	position: relative;
 	z-index: 5;
 
 	--x: calc(var(--posX, 0) * 1px);
 	--y: calc(var(--posY, 0) * 1px);
+
 	background-image: 
 		linear-gradient(115deg, rgb(211 255 215), rgb(0 0 0)),
 		radial-gradient(90% 100% at calc(50% + var(--x)) calc(0% + var(--y)), rgb(200 200 200), rgb(22 0 45)),
@@ -213,6 +225,7 @@ body {
 		radial-gradient(150% 210% at calc(100% + var(--x)) calc(0% + var(--y)), rgb(20 175 125), rgb(0 10 255)),
 		radial-gradient(100% 100% at calc(100% - var(--x)) calc(30% - var(--y)), rgb(255 77 0), rgb(0 200 255)),
 		linear-gradient(60deg, rgb(255 0 0), rgb(120 86 255));
+
 	background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -324,6 +337,26 @@ body {
 }
 
 @media (max-width: 720px) {
+	.site-header {
+		height: auto;
+	}
+
+	.site-inner {
+		padding: 10px 16px;
+		align-items: flex-start;
+	}
+
+	.nav {
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 8px;
+		margin-left: auto;
+	}
+
+	.nav .btn {
+		margin-left: 0;
+	}
+
 	.proj-grid {
 		grid-template-columns: 1fr;
 	}
@@ -338,7 +371,7 @@ body {
 /* Centered panel that holds About + Projects; semi-opaque so stars stay visible at page sides */
 .panel {
 	/* use flex to center content horizontally and vertically */
-	width: 100%;
+	width: 100vw;
 	justify-content: center; /* Centers horizontally */
 	align-items: center;     /* Centers vertically */
 	background: #1e1e1f;

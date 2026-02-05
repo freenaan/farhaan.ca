@@ -190,13 +190,14 @@ body {
 }
 
 .feature-media {
-  width: clamp(280px, 24vw, 460px);
+  width: clamp(0px, 30vw, 80vw);
   height: auto;
   background: #3a3a3a;
-  border: 3px solid #86b958; /* placeholder green frame */
+  border: 3px solid #1d1d1d; /* placeholder green frame */
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   color: #9ad26a;
   font-weight: 700;
   text-transform: uppercase;
@@ -205,7 +206,8 @@ body {
 
 .feature-media img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
