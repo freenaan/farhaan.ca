@@ -9,7 +9,7 @@
 </head>
 <body>
   <main>
-    <section class="project-hero" style="background-image: url('https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1650&q=80')">
+    <section class="project-hero" style="background-image: url('planetary0.jpg')">
       <div class="site-inner hero-header">
         <div class="brand"><a href="../index.html">Farhaan.ca</a></div>
         <nav class="nav">
@@ -40,7 +40,7 @@
               </br>
               <p>E<sub>Heat</sub> = F<sub>Friction</sub> * Δd, so by reducing Δd through the elimination of micro slips, heat generation is greatly reduced. This theoretically reduces total deformation by 90+%, greatly extending the life of the transmission and enabling its usage with stronger engines.</p>
             </div>
-            <div class="feature-media"><img src="planetary2.png" alt="Planetary transmission"></div>
+            <div class="feature-media"><img src="planetary2.png" alt="Teeth"></div>
           </div>
 
           <div class="feature-card feature-card-split">
@@ -49,15 +49,14 @@
                 <h3>Meticulously Optimized</h3>
                 <p>Throughout the design, several retainer rings were implemented to prevent the mechanical migration of bearings. Plastic is very prone to mechanical creep, especially at high temperatures, so a single press fit could not be trusted to permanently keep all attachments in place. Implementing said retainer rings were simple for all components save one; the driving shaft. A groove would be a weak point, and since the long driving shaft would already be prone to deformation, a weak point would be unacceptable.</p>
               </div>
-              <div class="feature-media"><span>Image</span></div>
+              <div class="feature-media"><img src="planetary3.png" alt="Bearings"></div>
             </div>
-            <div class="feature-subsection">
-              <div class="feature-media"><span>Image</span></div>
+            <div class="feature-subsection reverse">
               <div class="feature-text">
                 <p>Here’s the interesting part; good 3D printed shafts don’t have perfectly circular profiles. They must be printed lying down to orient the weak layer lines along the axis, and since that would cause bed adhesion issues, the top and bottom must be cut. This gave me the opportunity to create several different retainer designs and validate them using FEA to see which would be the most durable. Eventually I chose a design that protruded out from the original shaft to keep it as thick as possible. This wing design not only allowed the driving shaft to maintain its original strength, but also gave the sun gears more surface area to transfer their torque to the shaft, thereby enabling it to hold stronger loads.</p>
               </div>
+              <div class="feature-media"><img src="planetary4.png" alt="Custom Shaft"></div>
             </div>
-          </div>
           </div>
         </div>
 
@@ -73,11 +72,12 @@
     var title = document.querySelector('.project-hero h1');
     if(!hero) return;
 
-    // Set starting background-size (must match CSS percent)
-    var startBg = window.getComputedStyle(hero).backgroundSize || '250%';
+    // Set starting background-size (must match CSS percent if zooming)
+    var startBg = window.getComputedStyle(hero).backgroundSize || 'cover';
+    var allowResize = startBg.indexOf('%') > -1;
     var zoomPct = 250;
     try{
-      if(startBg.indexOf('%')>-1) zoomPct = parseFloat(startBg);
+      if(allowResize) zoomPct = parseFloat(startBg);
     }catch(e){}
 
     var baseSize = (zoomPct/100) * hero.offsetWidth;
@@ -87,9 +87,11 @@
       var fromTop = Math.max(0, window.scrollY || doc.scrollTop);
 
       // background size reduces as you scroll, similar to original formula
-      var newSize = baseSize - (fromTop/3);
-      if(newSize < hero.offsetWidth) newSize = hero.offsetWidth;
-      hero.style.backgroundSize = newSize + 'px';
+      if(allowResize){
+        var newSize = baseSize - (fromTop/3);
+        if(newSize < hero.offsetWidth) newSize = hero.offsetWidth;
+        hero.style.backgroundSize = newSize + 'px';
+      }
 
       // blur proportionally and fade out
       var blur = Math.min(12, fromTop/100);
