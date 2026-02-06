@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Russo+One&display=swap');
 
+
 /* Base for project pages (distinct from main landing) */
 body {
   background: #fff;
@@ -17,7 +18,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: cover;
+  -webkit-background-size: 115%;
+     -moz-background-size: 115%;
+       -o-background-size: 115%;
+          background-size: 115%;
   background-position: center center;
   background-repeat: no-repeat;
   position: fixed;
@@ -67,7 +71,7 @@ body {
   position: relative;
   z-index: 2;
   font-weight: 700;
-  font-size: clamp(36px, 6vw, 64px);
+  font-size: 7.111vh;
   letter-spacing: 1px;
   margin: 0;
   transition: opacity 200ms linear, transform 200ms linear;
@@ -76,7 +80,7 @@ body {
 /* match landing header font + button styles */
 .project-hero .brand a {
   font-family: 'Archivo Black', 'Russo One', sans-serif;
-  font-size: 34px;
+  font-size: 3.556vh;
   color: #fff;
   text-decoration: none;
   display: inline-block;
@@ -131,7 +135,7 @@ body {
   min-height: 100vh;
 }
 .project-inner {
-  max-width: 1100px;
+  max-width: 75vw;
   margin: 0 auto;
 }
 
@@ -176,7 +180,7 @@ body {
 
 .feature-text h3 {
   margin: 6px 0 12px 0;
-  font-size: 26px;
+  font-size: 3.334vh;
   color: #fff;
 }
 
@@ -185,7 +189,7 @@ body {
   margin-top: auto;
   margin-bottom: auto;
   line-height: 1.6;
-  font-size: 18px;
+  font-size: 2.249vh;
   color: #d7d7d7;
 }
 

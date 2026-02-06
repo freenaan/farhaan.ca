@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Shaurya the Sumobot</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <section class="project-hero" style="background-image: url('sumobot0.png')">
+      <div class="site-inner hero-header">
+        <div class="brand"><a href="../index.html">Farhaan.ca</a></div>
+        <nav class="nav">
+          <a class="btn" href="../contact.html">Contact</a>
+        </nav>
+      </div>
+      <h1 class="anim-1">Shaurya the Sumobot</h1>
+    </section>
+
+    <section class="project-content">
+      <div class="project-inner">
+        <div class="feature-list">
+          <div class="feature-card">
+            <div class="feature-text">
+              <h3>Overview</h3>
+              <p>Designing a self-driving sumobot is ultimately a problem of making the most of very limited data. The arena is small, the crowded space provides noisy data, and every twitch in the seeking algorithm results in lost ground.</p>
+              <p> With only two ultrasonic sensors, a handful of limit switches, and a compact 3D-printed chassis, I set out to build a robot that could ruthlessly optimize every variable. The severely limited scope of the competition left no room for shortcuts or tricks, the only way I would win this is by nailing my fundamentals.</p>
+            </div>
+            <div class="feature-media"><img src="shaurya1.jpg" alt="sumobot"></div>
+          </div>
+
+          <div class="feature-card reverse">
+            <div class="feature-text">
+              <h3>Dual‑Angle Object Detection</h3>
+              <p>Ultrasonics measure distance but not direction; once the opponent moves even slightly off‑axis, the echoes degrade, lag, or vanish. This could be the difference between real-time homing and spinning in circles trying to find the enemy bot.</p>
+              <br>
+              <p>To fix this, Shaurya uses two sensors angled apart, creating overlapping fields of detection that together form a coarse but effective 2D picture. When both sensors pick up a target, the robot drives forward with confidence; if only one sees something, it pivots sharply toward that direction. This fusion turns two low‑quality signals into one reliable directional cue. The bot behaves decisively because it not only knows how far the opponent is, but also where they are.</p>
+             </div>
+            <div class="feature-media"><img src="shaurya2.png" alt="sumobot"></div>
+          </div>
+
+          <div class="feature-card feature-card-split">
+            <div class="feature-subsection">
+              <div class="feature-text">
+                <h3>Sneak 100</h3>
+                <p>Ultrasonic data can be noisy and unreliable, so why not use it to my advantage? Opponents’ sensors emit sound waves in only one direction, and flat surfaces reflect that noise in exactly one direction. Shaurya’s front ramp was designed to exploit this by flying straight over the enemy’s head, literally. By deflecting the wave off an angled plane, incoming ultrasonic pulses are deflected to the ceiling instead of returning to the opponent. This dramatically weakens the echo signature the enemy receives, making Shaurya significantly harder to lock onto—roughly a 30% reduction in detection reliability based on measured response distances during testing.</p>
+              </div>
+              <div class="feature-media"><img src="shaurya3.png" alt="sumobot"></div>
+            </div>
+            <div class="feature-subsection reverse">
+              <div class="feature-text">
+                <p>The geometry serves a dual purpose however. While it passively degrades the opponent’s sensing accuracy, it still behaves like a proper sumobot wedge by lifting and redirecting forces during collisions. This means Shaurya can still keep the sumo in sumobot without sacrificing its ability to stay hidden. The result is a robot that not only sees its opponent more reliably, but is itself substantially harder to detect, a strategic edge created through simple physics rather than additional electronics.</p>
+              </div>
+              <div class="feature-media"><img src="shaurya4.jpg" alt="sumobot"></div>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-text">
+              <h3>Aggressive Action > Cautious Inaction</h3>
+              <p>At the heart of the robot is a control loop designed to act first and refine later. Instead of hoping for perfect sensor agreement, Shaurya commits to movement based on the strongest available cue: forward pressure when the opponent appears centered, lateral pressure when one sensor dominates, and rapid reacquisition turns when visibility drops. Timeouts and non‑blocking sensor reads prevent lockups and ensure decisions are made at a high frequency. The philosophy is simple: continuous action beats cautious waiting. By tying every motion to a directional hypothesis, rather than random searching or slow verification steps, the robot becomes difficult to evade and quick to exploit openings. In a contest measured in seconds, this constant forward intent becomes a competitive advantage in itself.</p>
+            </div>
+            <div class="feature-media"><img src="shaurya5.png" alt="sumobot chassis and battery"></div>
+          </div>
+        </div>
+
+        <div class="project-footer">© Farhaan Khan 2026</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (function(){
+    // background zoom/fade behaviour adapted from provided snippet (vanilla JS)
+    var hero = document.querySelector('.project-hero');
+    var title = document.querySelector('.project-hero h1');
+    if(!hero) return;
+
+    // Set starting background-size (must match CSS percent if zooming)
+    var startBg = window.getComputedStyle(hero).backgroundSize || 'cover';
+    var allowResize = startBg.indexOf('%') > -1;
+    var zoomPct = 250;
+    try{
+      if(allowResize) zoomPct = parseFloat(startBg);
+    }catch(e){}
+
+    var baseSize = (zoomPct/100) * hero.offsetWidth;
+    var doc = document.documentElement;
+
+    function onScroll(){
+      var fromTop = Math.max(0, window.scrollY || doc.scrollTop);
+
+      // background size reduces as you scroll, similar to original formula
+      if(allowResize){
+        var newSize = baseSize - (fromTop/3);
+        if(newSize < hero.offsetWidth) newSize = hero.offsetWidth;
+        hero.style.backgroundSize = newSize + 'px';
+      }
+
+      // blur proportionally and fade out
+      var blur = Math.min(12, fromTop/100);
+      hero.style.filter = 'blur(' + blur + 'px)';
+
+      // opacity based on scroll relative to document height (keeps effect subtle)
+      var opacity = 1 - ((fromTop / (doc.scrollHeight||document.body.scrollHeight)) * 1.3);
+      opacity = Math.max(0, Math.min(1, opacity));
+      hero.style.opacity = opacity;
+
+      // title fades and slightly scales toward background
+      if(title){
+        var maxFade = 300;
+        var t = Math.max(0, 1 - fromTop / maxFade);
+        title.style.opacity = t;
+        var scale = 1 - (1 - t) * 0.04;
+        title.style.transform = 'scale(' + scale + ')';
+      }
+    }
+
+    // Non-Chrome/Safari: add opaque overlay and fade it in as fallback
+    var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+    if(!(isChrome || isSafari)){
+      var o = document.createElement('div');
+      o.className = 'opaque';
+      hero.appendChild(o);
+      window.addEventListener('scroll', function(){
+        var op = Math.min(1, (window.scrollY||0)/5000);
+        o.style.opacity = op;
+      }, { passive: true });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+  </script>
+
+  <script src="../script.js"></script>
+</body>
+</html>

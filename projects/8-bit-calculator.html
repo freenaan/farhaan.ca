@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>8-Bit Calculator</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <section class="project-hero" style="background-image: url('calculator0.png')">
+      <div class="site-inner hero-header">
+        <div class="brand"><a href="../index.html">Farhaan.ca</a></div>
+        <nav class="nav">
+          <a class="btn" href="../contact.html">Contact</a>
+        </nav>
+      </div>
+      <h1 class="anim-1">8-Bit Calculator</h1>
+    </section>
+
+    <section class="project-content">
+      <div class="project-inner">
+        <div class="feature-list">
+          <div class="feature-card">
+            <div class="feature-text">
+              <h3>Overview</h3>
+              <p>“To make an apple pie from scratch, you must first invent the universe” - Carl Sagan</p>
+              <br>
+              <p>With modern computers running impossibly long calculations in milliseconds, it’s easy to forget how much work is hiding behind something as simple as addition. I wanted to strip that abstraction away and build an 8-bit calculator from the ground up, using nothing but logic gates. No chips, no black boxes, no shortcuts. Just raw combinational logic, explicit state, and circuit switching that has to be correct for the system to function at all. The result is a fully gate-level calculator capable of selectable addition and subtraction, persistent memory, and deterministic behavior—essentially a small primitive ALU built by hand.
+</p>
+            </div>
+            <div class="feature-media"><img src="calculator1.jpg" alt="8-bit calculator"></div>
+          </div>
+
+          <div class="feature-card reverse">
+            <div class="feature-text">
+              <h3>Arithmetic from First Principles</h3>
+              <p>Imagine trying to bake a pie without an oven, how would you cook it? At the core of the design was the problem of arithmetic without abstraction. Addition and subtraction sound trivial until you’re responsible for every carry, borrow, and trace between any two gates.</p>
+              <br>
+              <p>8-bit ripple-carry adder and extended it to support subtraction by conditionally inverting operands and injecting carry-in, allowing both operations to share the same architecture. </p>
+             </div>
+            <div class="feature-media"><img src="calculator2.jpg" alt="8-bit calculator"></div>
+          </div>
+
+          <div class="feature-card feature-card-split">
+            <div class="feature-subsection">
+              <div class="feature-text">
+                <h3>Memory</h3>
+                <p>Having a pie is all but useless if you don’t have somewhere to store it so it can cool down. Arithmetic was only the first challenge of this project; storing results reliably without glitches, race conditions, or unintended updates was another issue. </p>
+                <br>
+                <p>I avoided JK flip‑flops because their J = K = 1 condition causes repeated bit flips, so instead I used T flip‑flops which guarantee stable, predictable state changes. From there, I built a clock‑gated memory system that allows values to persist indefinitely until the user explicitly overwrites them. This prevents repeated transitions during arithmetic operations, which would defeat the point of memory in the first place.</p>
+              </div>
+              <div class="feature-media"><img src="calculator3.jpg" alt="8-bit calculator"></div>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-media"><img src="calculator4.png" alt="8-bit calculator"></div>
+            <div class="feature-text">
+              <h3>Selection</h3>
+              <p>Selecting between live computation and stored state required its own solution, so I designed a custom 8:4 multiplexer using Karnaugh maps to minimize control logic and reduce gate depth. The reduced logic not only simplified routing but also improved timing robustness, ensuring clean state transitions even as multiple subsystems interact. The result is a calculator that behaves predictably because every state change is regulated.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-footer">© Farhaan Khan 2026</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (function(){
+    // background zoom/fade behaviour adapted from provided snippet (vanilla JS)
+    var hero = document.querySelector('.project-hero');
+    var title = document.querySelector('.project-hero h1');
+    if(!hero) return;
+
+    // Set starting background-size (must match CSS percent if zooming)
+    var startBg = window.getComputedStyle(hero).backgroundSize || 'cover';
+    var allowResize = startBg.indexOf('%') > -1;
+    var zoomPct = 250;
+    try{
+      if(allowResize) zoomPct = parseFloat(startBg);
+    }catch(e){}
+
+    var baseSize = (zoomPct/100) * hero.offsetWidth;
+    var doc = document.documentElement;
+
+    function onScroll(){
+      var fromTop = Math.max(0, window.scrollY || doc.scrollTop);
+
+      // background size reduces as you scroll, similar to original formula
+      if(allowResize){
+        var newSize = baseSize - (fromTop/3);
+        if(newSize < hero.offsetWidth) newSize = hero.offsetWidth;
+        hero.style.backgroundSize = newSize + 'px';
+      }
+
+      // blur proportionally and fade out
+      var blur = Math.min(12, fromTop/100);
+      hero.style.filter = 'blur(' + blur + 'px)';
+
+      // opacity based on scroll relative to document height (keeps effect subtle)
+      var opacity = 1 - ((fromTop / (doc.scrollHeight||document.body.scrollHeight)) * 1.3);
+      opacity = Math.max(0, Math.min(1, opacity));
+      hero.style.opacity = opacity;
+
+      // title fades and slightly scales toward background
+      if(title){
+        var maxFade = 300;
+        var t = Math.max(0, 1 - fromTop / maxFade);
+        title.style.opacity = t;
+        var scale = 1 - (1 - t) * 0.04;
+        title.style.transform = 'scale(' + scale + ')';
+      }
+    }
+
+    // Non-Chrome/Safari: add opaque overlay and fade it in as fallback
+    var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+    if(!(isChrome || isSafari)){
+      var o = document.createElement('div');
+      o.className = 'opaque';
+      hero.appendChild(o);
+      window.addEventListener('scroll', function(){
+        var op = Math.min(1, (window.scrollY||0)/5000);
+        o.style.opacity = op;
+      }, { passive: true });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+  </script>
+
+  <script src="../script.js"></script>
+</body>
+</html>

@@ -1,24 +1,4 @@
-// Image placeholder preview: click a placeholder to select an image
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.proj-item').forEach(item => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.style.display = 'none';
-    item.appendChild(input);
-
-    item.addEventListener('click', () => input.click());
-
-    input.addEventListener('change', (e) => {
-      const f = e.target.files && e.target.files[0];
-      if (!f) return;
-      const img = item.querySelector('img');
-      img.src = URL.createObjectURL(f);
-      img.onload = () => URL.revokeObjectURL(img.src);
-      item.classList.add('filled');
-    });
-  });
-  
   // Starfield generator (creates box-shadow strings for many stars)
   function generateShadows(count, width, height) {
     const parts = [];

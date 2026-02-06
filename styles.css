@@ -20,7 +20,7 @@
 	- .about-box p: typography for the about paragraph text.
 	- .panel / .panel-inner: the centered panel that contains Projects + other blocks.
 	- .projects, .proj-grid, .proj-container, .proj-item, .proj-label: project grid and items.
-	- .contact / .contact-box / .link: contact area and link/button styling.
+	- .contact / .contact-container: contact area and form styling.
 	- #stars, #stars2, #stars3: starfield background layers (fixed, behind content).
 	- media queries: responsive adjustments for small screens (e.g., project grid).
 
@@ -36,7 +36,7 @@ body {
 
 /* Responsive root font size so page text scales smoothly */
 html {
-  font-size: clamp(15px, 2vw, 18px);
+	font-size: clamp(15px, 3.556vh, 18px);
 }
 
 body {
@@ -98,7 +98,7 @@ body {
 
 .brand a {
 	font-family: 'Archivo Black', 'Russo One', sans-serif;
-	font-size: 34px;
+	font-size: 3.556vh;
 	color: #fff;
 	text-decoration: none;
 	display: inline-block;
@@ -159,20 +159,21 @@ body {
 }
 
 .main {
-	margin: 120px auto 80px;
-	padding: 20px;
+	margin: 0 auto 80px;
+	padding: 0 20px;
 }
 
 /* Main content wrapper: centers page sections and provides outer margins */
 
 .hero {
-	padding: 60px 12px 28px;
+	padding: 0 12px;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
+	transform: translateY(-75px);
 }
 
 /* Top hero section: holds the large intro heading */
@@ -180,7 +181,7 @@ body {
 .hero-title {
 	font-family: 'Archivo Black', 'Russo One', Nunito, system-ui, 'Segoe UI', Roboto, Arial;
 	font-weight: 700;
-	font-size: clamp(48px, 8vw, 96px);
+	font-size: 7.406vh;
 	color: #fff;
 	margin-bottom: 6px;
 }
@@ -196,9 +197,10 @@ body {
 .about h2 {
 	font-family: 'Archivo Black', 'Russo One', Nunito, system-ui, 'Segoe UI', Roboto, Arial;
 	font-weight: 700;
-	font-size: clamp(28px, 6vw, 56px);
+	font-size: 4.32vh;
 	color: #fff;
-	margin-bottom: 10px;
+	text-align: left;
+	margin: 0 0 10px clamp(24px, 6vw, 80px);
 }
 
 /* About heading style */
@@ -234,7 +236,7 @@ body {
 
 /* Typography for the about text */
 .about-box p {
-	font-size: clamp(18px, 3vw, 32px);
+	font-size: 2.469vh;
 	line-height: 1.55;
 	letter-spacing: 0.3px;
 	text-align: center;
@@ -248,7 +250,7 @@ body {
 .projects h2 {
 	font-family: 'Russo One', Nunito, system-ui, 'Segoe UI', Roboto, Arial;
 	font-weight: 700;
-	font-size: 28px;
+	font-size: 2.16vh;
 	color: #fff;
 	margin-bottom: 12px;
 }
@@ -273,16 +275,14 @@ body {
 
 .proj-item {
 	background: transparent;
-	border: 4px dashed rgba(0, 0, 0, 0.2);
 	height: 220px;
-	border-radius: 10px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 	overflow: hidden;
 	cursor: pointer;
-	box-shadow: 18px 22px 0 rgba(0, 0, 0, 0.12);
+	/* removed outline and drop shadow so transparent PNGs show through */
 }
 
 /* Project images fill their frames */
@@ -299,7 +299,7 @@ body {
 .proj-label {
 	font-family: Nunito, system-ui, 'Segoe UI', Roboto, Arial;
 	font-weight: 700;
-	font-size: 18px;
+	font-size: 1.389vh;
 	color: #fff;
 	text-decoration: underline;
 	cursor: pointer;
@@ -316,25 +316,6 @@ body {
 
 /* Contact container layout */
 
-.contact-box {
-	display: flex;
-	flex-direction: column;
-	gap: 8px;
-}
-
-/* Generic button/link style used in header and contact */
-
-.link {
-	display: inline-block;
-	background: #fff;
-	border: 3px solid #222;
-	padding: 8px 12px;
-	border-radius: 8px;
-	text-decoration: none;
-	color: #222;
-	font-weight: 700;
-	box-shadow: 8px 10px 0 rgba(0, 0, 0, 0.14);
-}
 
 @media (max-width: 720px) {
 	.site-header {
@@ -546,7 +527,7 @@ body {
 }
 .contact-page .hero-title {
 	/* Slightly larger and nudged up */
-	font-size: clamp(22px, 5vw, 42px);
+	font-size: clamp(22px, 8.889vh, 42px);
 	margin-top: 4px;
 	margin-bottom: 12px;
 	font-weight: 700;
