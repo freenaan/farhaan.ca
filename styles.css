@@ -63,7 +63,6 @@ body {
 	z-index: 50;
 	background: transparent;
 }
-
 /* Top navigation bar: fixed to top, holds brand + nav buttons */
 
 .site-inner {
@@ -457,7 +456,6 @@ body {
 /* Ensure header and main content render above the star layers */
 
 /* ensure page content appears above the stars */
-.site-header,
 .main {
 	position: relative;
 	z-index: 10;
