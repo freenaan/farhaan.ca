@@ -53,7 +53,7 @@ body {
 /* Page shell: fonts, background gradient and global text colour */
 
 .site-header {
-	position: fixed;
+	position: static;
 	left: 0;
 	right: 0;
 	top: 0;
@@ -172,7 +172,6 @@ body {
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
-	transform: translateY(-75px);
 }
 
 /* Top hero section: holds the large intro heading */
