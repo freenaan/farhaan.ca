@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="36ced0df-3565-4658-b6f6-ca6fb89aaf49"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Closed-Loop Basketball Bot</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <section class="project-hero" style="background-image: url('basketball0.jpg')">
+      <div class="site-inner hero-header">
+        <div class="brand"><a href="../index.html">Farhaan.ca</a></div>
+        <nav class="nav">
+          <a class="btn" href="../contact.html">Contact</a>
+        </nav>
+      </div>
+      <h1 class="anim-1">Closed-Loop Basketball Bot</h1>
+    </section>
+
+    <section class="project-content">
+      <div class="project-inner">
+        <div class="feature-list">
+          <div class="feature-card">
+            <div class="feature-text">
+              <h3>Overview</h3>
+              <p>Most robots score points. We decided to find a glitch.</p>
+              <p>The competition was simple: launch balls into a hoop for 3 points each, or bank them into a scoreboard for more (but you lose them forever.) The hoop was designed for the balls to be reused, but the organizer presumed they would have to be manually re-collected. If you could build a robot that never let go of its balls, you could just skip that step. You'd essentially make an infinite points glitch.</p>
+              <p>The catch? You only get 5 motors, a 12×12×12" envelope, and one 3D printed part. Building an infinitely recycling ball machine inside those constraints was the actual engineering problem.</p>
+            </div>
+            <div class="feature-media"><img src="basketball1.jpg" alt="Closed-Loop Basketball Bot"></div>
+          </div>
+
+          <div class="feature-card reverse">
+            <div class="feature-text">
+              <h3>The Hoop Problem</h3>
+              <p>Getting the ball into the hoop consistently was harder than it sounds. The hoop sat at the maximum allowable robot height, which left no room for additional mechanisms. The ball had to arrive at exactly the right height and angle on its own. Shallow rails kept it on track, and a custom-angled 3D printed ramp, our one allowed printed part, did the rest. The angle had to be shallow enough to keep the ball above the rim, but steep enough to carry it over. It took a few iterations, but once it worked, it worked every time.</p>
+            </div>
+            <div class="feature-media" style="width: clamp(0px, 40vw, 80vw)"><img src="basketball2.jpg" alt="Basketball hoop mechanism"></div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-text">
+              <h3>The Conveyor Problem</h3>
+              <p>Getting the ball up was the harder problem. A vertical conveyor was the only mechanism that fit the envelope, but VEX gives you no tensioning components. A loose belt drops the ball. A tight belt stalls the motor. We had no tensioner, no custom pulleys, and no margin for error.</p>
+              <p>The solution was geometry. By under-dimensioning the loop by 5–10mm and designing the chassis as a rigid cube rather than a frame, we used structural rigidity as the tensioning mechanism. The interference fit held the belt taut, the chassis prevented flex, and the whole thing ran without a single dedicated tensioning part.</p>
+              <p>Getting the ball into the loop was easier; we just drove into it, ramming balls against a fixed wall and straight onto the belt. Getting it back was not. Balls would reach the bottom of the return and stall, falling out of the loop before re-engaging. We added a motor-driven wheel at the base of the return path to force balls back onto the belt, and a rear brace to stop them from being pushed out the back. After that, the loop ran flawlessly.</p>
+            </div>
+            <div class="feature-media"><img src="basketball3.jpg" alt="Conveyor mechanism"></div>
+          </div>
+
+          <div class="feature-card reverse">
+            <div class="feature-text">
+              <h3>Results</h3>
+              <p>We scored 33 points. Second place scored 15.</p>
+              <p>After initial positioning, scoring was reduced to holding two buttons. The closed loop ran continuously, recycling the same balls through the hoop indefinitely with zero additional driver input. One competing team attempted a similar design but couldn't achieve full closure. Their loop required manual reloading between cycles, while ours didn't.</p>
+              <p>The margin came down to one additional design decision: rather than dropping recycled balls to the bottom of the conveyor, our return path reintroduced them at the midpoint. That cut cycle time roughly in half compared to a full-height return, and over a timed match, that difference compounds into an over 2:1 lead.</p>
+            </div>
+            <div class="feature-media"><img src="basketball4.jpg" alt="Competition results"></div>
+          </div>
+        </div>
+
+        <div class="project-footer">© Farhaan Khan 2026</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (function(){
+    var hero = document.querySelector('.project-hero');
+    var title = document.querySelector('.project-hero h1');
+    if(!hero) return;
+
+    var startBg = window.getComputedStyle(hero).backgroundSize || 'cover';
+    var allowResize = startBg.indexOf('%') > -1;
+    var zoomPct = 250;
+    try{
+      if(allowResize) zoomPct = parseFloat(startBg);
+    }catch(e){}
+
+    var baseSize = (zoomPct/100) * hero.offsetWidth;
+    var doc = document.documentElement;
+
+    function onScroll(){
+      var fromTop = Math.max(0, window.scrollY || doc.scrollTop);
+
+      if(allowResize){
+        var newSize = baseSize - (fromTop/3);
+        if(newSize < hero.offsetWidth) newSize = hero.offsetWidth;
+        hero.style.backgroundSize = newSize + 'px';
+      }
+
+      var blur = Math.min(12, fromTop/100);
+      hero.style.filter = 'blur(' + blur + 'px)';
+
+      var opacity = 1 - ((fromTop / (doc.scrollHeight||document.body.scrollHeight)) * 1.3);
+      opacity = Math.max(0, Math.min(1, opacity));
+      hero.style.opacity = opacity;
+
+      if(title){
+        var maxFade = 300;
+        var t = Math.max(0, 1 - fromTop / maxFade);
+        title.style.opacity = t;
+        var scale = 1 - (1 - t) * 0.04;
+        title.style.transform = 'scale(' + scale + ')';
+      }
+    }
+
+    var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+    if(!(isChrome || isSafari)){
+      var o = document.createElement('div');
+      o.className = 'opaque';
+      hero.appendChild(o);
+      window.addEventListener('scroll', function(){
+        var op = Math.min(1, (window.scrollY||0)/5000);
+        o.style.opacity = op;
+      }, { passive: true });
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+  </script>
+
+  <script src="../script.js"></script>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="36ced0df-3565-4658-b6f6-ca6fb89aaf49"></script>
+</body>
+</html>
