@@ -4,55 +4,53 @@
 	<script defer src="https://cloud.umami.is/script.js" data-website-id="36ced0df-3565-4658-b6f6-ca6fb89aaf49"></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="theme-color" content="#08080a">
+	<meta name="description" content="Get in touch with Farhaan Khan.">
 	<title>Contact — Farhaan</title>
-	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/styles.css">
 </head>
-<body class="contact-page">
+<body>
 	<!-- starfield layers reused from index -->
 	<div id="stars" aria-hidden="true"></div>
 	<div id="stars2" aria-hidden="true"></div>
 	<div id="stars3" aria-hidden="true"></div>
 
 	<header class="site-header">
-		<div class="site-inner">
-			<div class="brand"><a href="index.html">Farhaan.ca</a></div>
+		<div class="site-inner content-width">
+			<a class="brand" href="index.html">Farhaan.ca</a>
 			<nav class="nav">
-				<a class="btn" href="index.html#projects">Projects</a>
-				<a class="btn" href="contact.html">Contact</a>
+				<a class="nav-link" href="index.html#projects">Projects</a>
+				<a class="nav-link" href="contact.html">Contact</a>
 			</nav>
 		</div>
 	</header>
 
 	<main class="main">
-		<section class="hero">
-			<h1 class="hero-title">Contact</h1>
-		</section>
-
-			<section class="contact">
-				<div class="container contact-container">
-					<form action="https://formspree.io/f/xnjvbvjj" method="POST">
-
-						<label>
-							Your email:
-							<input type="email" name="email">
+		<section class="section">
+			<div class="content-width">
+				<h2 class="section-heading">Contact</h2>
+				<div class="card contact-panel">
+					<form class="contact-form" action="https://formspree.io/f/xnjvbvjj" method="POST">
+						<label class="field">
+							<span class="field-label">Your email</span>
+							<input class="field-input" type="email" name="email">
 						</label>
 
-						<label>
-							Your message:
-							<textarea name="message"></textarea>
+						<label class="field">
+							<span class="field-label">Your message</span>
+							<textarea class="field-input" name="message"></textarea>
 						</label>
 
-						<!-- your other form fields go here -->
-						<button type="submit">Send</button>
-
+						<button class="btn-primary" type="submit">Send message</button>
 					</form>
 				</div>
-			</section>
+			</div>
+		</section>
 	</main>
 
-	<script src="script.js"></script>
+	<script src="assets/js/script.js?v=2"></script>
 </body>
 </html>

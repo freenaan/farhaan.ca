@@ -5,16 +5,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Closed-Loop Basketball Bot</title>
-  <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=15">
+  <link rel="stylesheet" href="../assets/css/projects.css?v=7">
 </head>
 <body>
   <main>
-    <section class="project-hero" style="background-image: url('basketball0.jpg')">
-      <div class="site-inner hero-header">
-        <div class="brand"><a href="../index.html">Farhaan.ca</a></div>
+    <section class="project-hero" style="background-image: url('../assets/images/basketball/basketball0.jpg')">
+      <div class="site-inner content-width">
+        <a class="brand" href="../index.html">Farhaan.ca</a>
         <nav class="nav">
-          <a class="btn" href="../contact.html">Contact</a>
+          <a class="nav-link" href="../index.html#projects">Projects</a>
+          <a class="nav-link" href="../contact.html">Contact</a>
         </nav>
       </div>
       <h1 class="anim-1">Closed-Loop Basketball Bot</h1>
@@ -22,47 +23,70 @@
 
     <section class="project-content">
       <div class="project-inner">
-        <div class="feature-list">
-          <div class="feature-card">
-            <div class="feature-text">
-              <h3>Overview</h3>
-              <p>Most robots score points. We decided to find a glitch.</p>
-              <p>The competition was simple: launch balls into a hoop for 3 points each, or bank them into a scoreboard for more (but you lose them forever.) The hoop was designed for the balls to be reused, but the organizer presumed they would have to be manually re-collected. If you could build a robot that never let go of its balls, you could just skip that step. You'd essentially make an infinite points glitch.</p>
-              <p>The catch? You only get 5 motors, a 12×12×12" envelope, and one 3D printed part. Building an infinitely recycling ball machine inside those constraints was the actual engineering problem.</p>
+        <div class="case-panel">
+        <a class="back-link" href="../index.html#projects">← All projects</a>
+        <div class="case-list">
+          <div class="case-section">
+            <h3>Overview</h3>
+            <div class="case-row">
+              <div class="case-text">
+                <p>Most robots score points. We decided to find a glitch.</p>
+                <p>The competition was simple: launch balls into a hoop for 3 points each, or bank them into a scoreboard for more (but you lose them forever.) The hoop was designed for the balls to be reused, but the organizer presumed they would have to be manually re-collected. If you could build a robot that never let go of its balls, you could just skip that step. You'd essentially make an infinite points glitch.</p>
+                <p>The catch? You only get 5 motors, a 12×12×12" envelope, and one 3D printed part. Building an infinitely recycling ball machine inside those constraints was the actual engineering problem.</p>
+              </div>
+              <figure class="case-figure">
+                <img src="../assets/images/basketball/basketball1.jpg" alt="Concept sketch of the scoring and recycling loop">
+                <figcaption>An early concept sketch: balls loop from the hoop's scoring cup back through a conveyor to be reused.</figcaption>
+              </figure>
             </div>
-            <div class="feature-media"><img src="basketball1.jpg" alt="Closed-Loop Basketball Bot"></div>
           </div>
 
-          <div class="feature-card reverse">
-            <div class="feature-text">
-              <h3>The Hoop Problem</h3>
-              <p>Getting the ball into the hoop consistently was harder than it sounds. The hoop sat at the maximum allowable robot height, which left no room for additional mechanisms. The ball had to arrive at exactly the right height and angle on its own. Shallow rails kept it on track, and a custom-angled 3D printed ramp, our one allowed printed part, did the rest. The angle had to be shallow enough to keep the ball above the rim, but steep enough to carry it over. It took a few iterations, but once it worked, it worked every time.</p>
+          <div class="case-section">
+            <h3>The Hoop Problem</h3>
+            <div class="case-row reverse">
+              <div class="case-text">
+                <p>Getting the ball into the hoop consistently was harder than it sounds. The hoop sat at the maximum allowable robot height, which left no room for additional mechanisms. The ball had to arrive at exactly the right height and angle on its own. Shallow rails kept it on track, and a custom-angled 3D printed ramp, our one allowed printed part, did the rest. The angle had to be shallow enough to keep the ball above the rim, but steep enough to carry it over. It took a few iterations, but once it worked, it worked every time.</p>
+              </div>
+              <figure class="case-figure">
+                <img src="../assets/images/basketball/basketball2.jpg" alt="Assembling the conveyor mechanism">
+                <figcaption>Assembling the drivetrain and conveyor mechanism ahead of competition.</figcaption>
+              </figure>
             </div>
-            <div class="feature-media" style="width: clamp(0px, 40vw, 80vw)"><img src="basketball2.jpg" alt="Basketball hoop mechanism"></div>
           </div>
 
-          <div class="feature-card">
-            <div class="feature-text">
-              <h3>The Conveyor Problem</h3>
-              <p>Getting the ball up was the harder problem. A vertical conveyor was the only mechanism that fit the envelope, but VEX gives you no tensioning components. A loose belt drops the ball. A tight belt stalls the motor. We had no tensioner, no custom pulleys, and no margin for error.</p>
-              <p>The solution was geometry. By under-dimensioning the loop by 5–10mm and designing the chassis as a rigid cube rather than a frame, we used structural rigidity as the tensioning mechanism. The interference fit held the belt taut, the chassis prevented flex, and the whole thing ran without a single dedicated tensioning part.</p>
-              <p>Getting the ball into the loop was easier; we just drove into it, ramming balls against a fixed wall and straight onto the belt. Getting it back was not. Balls would reach the bottom of the return and stall, falling out of the loop before re-engaging. We added a motor-driven wheel at the base of the return path to force balls back onto the belt, and a rear brace to stop them from being pushed out the back. After that, the loop ran flawlessly.</p>
+          <div class="case-section">
+            <h3>The Conveyor Problem</h3>
+            <div class="case-row">
+              <div class="case-text">
+                <p>Getting the ball up was the harder problem. A vertical conveyor was the only mechanism that fit the envelope, but VEX gives you no tensioning components. A loose belt drops the ball. A tight belt stalls the motor. We had no tensioner, no custom pulleys, and no margin for error.</p>
+                <p>The solution was geometry. By under-dimensioning the loop by 5–10mm and designing the chassis as a rigid cube rather than a frame, we used structural rigidity as the tensioning mechanism. The interference fit held the belt taut, the chassis prevented flex, and the whole thing ran without a single dedicated tensioning part.</p>
+                <p>Getting the ball into the loop was easier; we just drove into it, ramming balls against a fixed wall and straight onto the belt. Getting it back was not. Balls would reach the bottom of the return and stall, falling out of the loop before re-engaging. We added a motor-driven wheel at the base of the return path to force balls back onto the belt, and a rear brace to stop them from being pushed out the back. After that, the loop ran flawlessly.</p>
+              </div>
+              <figure class="case-figure">
+                <img src="../assets/images/basketball/basketball3.jpg" alt="Chain-driven conveyor and drivetrain">
+                <figcaption>The chain-driven conveyor and omni-wheel drivetrain, viewed from the front.</figcaption>
+              </figure>
             </div>
-            <div class="feature-media"><img src="basketball3.jpg" alt="Conveyor mechanism"></div>
           </div>
 
-          <div class="feature-card reverse">
-            <div class="feature-text">
-              <h3>Results</h3>
-              <p>We scored 33 points. Second place scored 15.</p>
-              <p>After initial positioning, scoring was reduced to holding two buttons. The closed loop ran continuously, recycling the same balls through the hoop indefinitely with zero additional driver input. One competing team attempted a similar design but couldn't achieve full closure. Their loop required manual reloading between cycles, while ours didn't.</p>
-              <p>The margin came down to one additional design decision: rather than dropping recycled balls to the bottom of the conveyor, our return path reintroduced them at the midpoint. That cut cycle time roughly in half compared to a full-height return, and over a timed match, that difference compounds into an over 2:1 lead.</p>
+          <div class="case-section">
+            <h3>Results</h3>
+            <div class="case-row reverse">
+              <div class="case-text">
+                <p>We scored <span class="stat">33 points</span>. Second place scored 15.</p>
+                <p>After initial positioning, scoring was reduced to holding two buttons. The closed loop ran continuously, recycling the same balls through the hoop indefinitely with zero additional driver input. One competing team attempted a similar design but couldn't achieve full closure. Their loop required manual reloading between cycles, while ours didn't.</p>
+                <p>The margin came down to one additional design decision: rather than dropping recycled balls to the bottom of the conveyor, our return path reintroduced them at the midpoint. That cut cycle time roughly in half compared to a full-height return, and over a timed match, that difference compounds into an over 2:1 lead.</p>
+              </div>
+              <figure class="case-figure">
+                <img src="../assets/images/basketball/basketball4.jpg" alt="Team with the finished ramp and conveyor assembly">
+                <figcaption>The team with the finished ramp and conveyor assembly.</figcaption>
+              </figure>
             </div>
-            <div class="feature-media"><img src="basketball4.jpg" alt="Competition results"></div>
           </div>
         </div>
 
         <div class="project-footer">© Farhaan Khan 2026</div>
+        </div>
       </div>
     </section>
   </main>
@@ -120,12 +144,28 @@
       }, { passive: true });
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    // Scroll fires far more often than the display can paint, and each
+    // onScroll() call writes several styles (filter, background-size,
+    // opacity) that force a repaint — running it unthrottled can call it
+    // many times per frame. Coalescing to one call per animation frame
+    // keeps the same visual result at a fraction of the work.
+    var scrollTicking = false;
+    function requestScrollTick(){
+      if (!scrollTicking) {
+        scrollTicking = true;
+        requestAnimationFrame(function(){
+          onScroll();
+          scrollTicking = false;
+        });
+      }
+    }
+
+    window.addEventListener('scroll', requestScrollTick, { passive: true });
     onScroll();
   })();
   </script>
 
-  <script src="../script.js"></script>
+  <script src="../assets/js/script.js?v=2"></script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="36ced0df-3565-4658-b6f6-ca6fb89aaf49"></script>
 </body>
 </html>
