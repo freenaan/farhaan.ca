@@ -5,16 +5,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Shaurya the Sumobot</title>
-  <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=15">
+  <link rel="stylesheet" href="../assets/css/projects.css?v=7">
 </head>
 <body>
   <main>
-    <section class="project-hero" style="background-image: url('sumobot0.png')">
-      <div class="site-inner hero-header">
-        <div class="brand"><a href="../index.html">Farhaan.ca</a></div>
+    <section class="project-hero" style="background-image: url('../assets/images/shaurya/sumobot0.png')">
+      <div class="site-inner content-width">
+        <a class="brand" href="../index.html">Farhaan.ca</a>
         <nav class="nav">
-          <a class="btn" href="../contact.html">Contact</a>
+          <a class="nav-link" href="../index.html#projects">Projects</a>
+          <a class="nav-link" href="../contact.html">Contact</a>
         </nav>
       </div>
       <h1 class="anim-1">Shaurya the Sumobot</h1>
@@ -22,56 +23,83 @@
 
     <section class="project-content">
       <div class="project-inner">
-        <div class="feature-list">
-          <div class="feature-card">
-            <div class="feature-text">
-              <h3>Overview</h3>
-              <p>Designing a self-driving sumobot is ultimately a problem of making the most of very limited data. The arena is small, the crowded space provides noisy data, and every twitch in the seeking algorithm results in lost ground.</p>
-              <p> With only two ultrasonic sensors, a handful of limit switches, and a compact 3D-printed chassis, I set out to build a robot that could ruthlessly optimize every variable. The severely limited scope of the competition left no room for shortcuts or tricks, the only way I would win this is by nailing my fundamentals.</p>
-            </div>
-            <div class="feature-media"><img src="shaurya1.png" alt="sumobot"></div>
-          </div>
-
-          <div class="feature-card reverse">
-            <div class="feature-text">
-              <h3>Dual‑Angle Object Detection</h3>
-              <p>Ultrasonics measure distance but not direction; once the opponent moves even slightly off‑axis, the echoes degrade, lag, or vanish. This could be the difference between real-time homing and spinning in circles trying to find the enemy bot.</p>
-              <br>
-              <p>To fix this, Shaurya uses two sensors angled apart, creating overlapping fields of detection that together form a coarse but effective 2D picture. When both sensors pick up a target, the robot drives forward with confidence; if only one sees something, it pivots sharply toward that direction. This fusion turns two low‑quality signals into one reliable directional cue. The bot behaves decisively because it not only knows how far the opponent is, but also where they are.</p>
-             </div>
-            <div class="feature-media"><img src="shaurya2.png" alt="sumobot"></div>
-          </div>
-
-          <div class="feature-card feature-card-split">
-            <div class="feature-subsection">
-              <div class="feature-text">
-                <h3>Sneak 100</h3>
-                <p>Ultrasonic data can be noisy and unreliable, so why not use it to my advantage? Opponents’ sensors emit sound waves in only one direction, and flat surfaces reflect that noise in exactly one direction. Shaurya’s front ramp was designed to exploit this by flying straight over the enemy’s head, literally. By deflecting the wave off an angled plane, incoming ultrasonic pulses are deflected to the ceiling instead of returning to the opponent. This dramatically weakens the echo signature the enemy receives, making Shaurya significantly harder to lock onto—roughly a 30% reduction in detection reliability based on measured response distances during testing.</p>
+        <div class="case-panel">
+        <a class="back-link" href="../index.html#projects">← All projects</a>
+        <div class="case-list">
+          <div class="case-section">
+            <h3>Overview</h3>
+            <div class="case-row">
+              <div class="case-text">
+                <p>Designing a self-driving sumobot is ultimately a problem of making the most of very limited data. The arena is small, the crowded space provides noisy data, and every twitch in the seeking algorithm results in lost ground.</p>
+                <p>With only two ultrasonic sensors, a handful of limit switches, and a compact 3D-printed chassis, I set out to build a robot that could ruthlessly optimize every variable. The severely limited scope of the competition left no room for shortcuts or tricks, the only way I would win this is by nailing my fundamentals.</p>
               </div>
-              <div class="feature-media"><img src="shaurya3.png" alt="sumobot"></div>
+              <figure class="case-figure">
+                <img src="../assets/images/shaurya/shaurya1.png" alt="Shaurya sumobot chassis">
+                <figcaption>Shaurya's finished chassis, with the dual ultrasonic sensors mounted up front.</figcaption>
+              </figure>
             </div>
-            <div class="feature-subsection reverse">
-              <div class="feature-text">
+          </div>
+
+          <div class="case-section">
+            <h3>Dual‑Angle Object Detection</h3>
+            <div class="case-row reverse">
+              <div class="case-text">
+                <p>Ultrasonics measure distance but not direction; once the opponent moves even slightly off‑axis, the echoes degrade, lag, or vanish. This could be the difference between real-time homing and spinning in circles trying to find the enemy bot.</p>
+                <p>To fix this, Shaurya uses two sensors angled apart, creating overlapping fields of detection that together form a coarse but effective 2D picture. When both sensors pick up a target, the robot drives forward with confidence; if only one sees something, it pivots sharply toward that direction. This fusion turns two low‑quality signals into one reliable directional cue. The bot behaves decisively because it not only knows how far the opponent is, but also where they are.</p>
+              </div>
+              <figure class="case-figure">
+                <img src="../assets/images/shaurya/shaurya2.png" alt="Dual ultrasonic sensor mounting">
+                <figcaption>The two sensors angled apart, building a coarse directional picture instead of a single distance reading.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="case-section">
+            <h3>Sneak 100</h3>
+            <div class="case-row">
+              <div class="case-text">
+                <p>Ultrasonic data can be noisy and unreliable, so why not use it to my advantage? Opponents’ sensors emit sound waves in only one direction, and flat surfaces reflect that noise in exactly one direction. Shaurya’s front ramp was designed to exploit this by flying straight over the enemy’s head, literally. By deflecting the wave off an angled plane, incoming ultrasonic pulses are deflected to the ceiling instead of returning to the opponent. This dramatically weakens the echo signature the enemy receives, making Shaurya significantly harder to lock onto. Testing measured roughly a <span class="stat">30% reduction</span> in detection reliability based on response distances.</p>
+              </div>
+              <figure class="case-figure">
+                <img src="../assets/images/shaurya/shaurya3.png" alt="Angled front ramp">
+                <figcaption>The front ramp geometry that deflects incoming ultrasonic pulses toward the ceiling instead of back at the opponent.</figcaption>
+              </figure>
+            </div>
+            <div class="case-row reverse">
+              <div class="case-text">
                 <p>The geometry serves a dual purpose however. While it passively degrades the opponent’s sensing accuracy, it still behaves like a proper sumobot wedge by lifting and redirecting forces during collisions. This means Shaurya can still keep the sumo in sumobot without sacrificing its ability to stay hidden. The result is a robot that not only sees its opponent more reliably, but is itself substantially harder to detect, a strategic edge created through simple physics rather than additional electronics.</p>
               </div>
-              <div class="feature-media"><img src="shaurya4.jpg" alt="sumobot"></div>
+              <figure class="case-figure">
+                <img src="../assets/images/shaurya/shaurya4.jpg" alt="Ramp acting as a sumobot wedge">
+                <figcaption>The same ramp doubling as a standard sumobot wedge, lifting and redirecting force on contact.</figcaption>
+              </figure>
             </div>
           </div>
-          <div class="feature-card">
-            <div class="feature-text">
-              <h3>Aggressive Action > Cautious Inaction</h3>
-              <p>At the heart of the robot is a control loop designed to act first and refine later. Instead of hoping for perfect sensor agreement, Shaurya commits to movement based on the strongest available cue: forward pressure when the opponent appears centered, lateral pressure when one sensor dominates, and rapid reacquisition turns when visibility drops. Timeouts and non‑blocking sensor reads prevent lockups and ensure decisions are made at a high frequency. The philosophy is simple: continuous action beats cautious waiting. By tying every motion to a directional hypothesis, rather than random searching or slow verification steps, the robot becomes difficult to evade and quick to exploit openings. In a contest measured in seconds, this constant forward intent becomes a competitive advantage in itself.</p>
-            </div>
-            <div class="feature-media"><img src="shaurya5.png" alt="sumobot chassis and battery"></div>
-          </div>
-        </div>
 
-        <div class="recap-card">
-          <h3>Quick Recap</h3>
-          <img src="shauyra7.png" alt="Shaurya sumobot project flyer">
+          <div class="case-section">
+            <h3>Aggressive Action &gt; Cautious Inaction</h3>
+            <div class="case-row">
+              <div class="case-text">
+                <p>At the heart of the robot is a control loop designed to act first and refine later. Instead of hoping for perfect sensor agreement, Shaurya commits to movement based on the strongest available cue: forward pressure when the opponent appears centered, lateral pressure when one sensor dominates, and rapid reacquisition turns when visibility drops. Timeouts and non‑blocking sensor reads prevent lockups and ensure decisions are made at a high frequency. The philosophy is simple: continuous action beats cautious waiting. By tying every motion to a directional hypothesis, rather than random searching or slow verification steps, the robot becomes difficult to evade and quick to exploit openings. In a contest measured in seconds, this constant forward intent becomes a competitive advantage in itself.</p>
+              </div>
+              <figure class="case-figure">
+                <img src="../assets/images/shaurya/shaurya5.png" alt="Control loop decision flowchart">
+                <figcaption>The control loop's decision logic: read both sensors, check for an edge, then commit to the strongest available directional cue.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="case-section">
+            <h3>Quick Recap</h3>
+            <figure class="case-figure">
+              <img src="../assets/images/shaurya/shauyra7.png" alt="Shaurya sumobot project flyer">
+              <figcaption>A one-page summary of Shaurya's sensor layout and control philosophy, presented alongside the robot at competition.</figcaption>
+            </figure>
+          </div>
         </div>
 
         <div class="project-footer">© Farhaan Khan 2026</div>
+        </div>
       </div>
     </section>
   </main>
@@ -136,12 +164,28 @@
       }, { passive: true });
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    // Scroll fires far more often than the display can paint, and each
+    // onScroll() call writes several styles (filter, background-size,
+    // opacity) that force a repaint — running it unthrottled can call it
+    // many times per frame. Coalescing to one call per animation frame
+    // keeps the same visual result at a fraction of the work.
+    var scrollTicking = false;
+    function requestScrollTick(){
+      if (!scrollTicking) {
+        scrollTicking = true;
+        requestAnimationFrame(function(){
+          onScroll();
+          scrollTicking = false;
+        });
+      }
+    }
+
+    window.addEventListener('scroll', requestScrollTick, { passive: true });
     onScroll();
   })();
   </script>
 
-  <script src="../script.js"></script>
+  <script src="../assets/js/script.js?v=2"></script>
   <script defer src="https://cloud.umami.is/script.js" data-website-id="36ced0df-3565-4658-b6f6-ca6fb89aaf49"></script>
 </body>
 </html>

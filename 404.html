@@ -4,21 +4,12 @@
 	<script defer src="https://cloud.umami.is/script.js" data-website-id="36ced0df-3565-4658-b6f6-ca6fb89aaf49"></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="theme-color" content="#08080a">
 	<title>farhaan.ca — 404</title>
-	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="styles.css">
-	<style>
-	/* small additions for this page */
-	.hero-sub {
-		font-size: 20px;
-		color: #dcdcdc;
-		margin-top: 12px;
-		max-width: 800px;
-		text-align: center;
-	}
-	</style>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
 	<div id="stars" aria-hidden="true"></div>
@@ -26,22 +17,25 @@
 	<div id="stars3" aria-hidden="true"></div>
 
 	<header class="site-header">
-		<div class="site-inner">
-			<div class="brand"><a href="index.html">Farhaan.ca</a></div>
+		<div class="site-inner content-width">
+			<a class="brand" href="index.html">Farhaan.ca</a>
 			<nav class="nav">
-				<a class="btn" href="index.html#projects">Projects</a>
-				<a class="btn" href="contact.html">Contact</a>
+				<a class="nav-link" href="index.html#projects">Projects</a>
+				<a class="nav-link" href="contact.html">Contact</a>
 			</nav>
 		</div>
 	</header>
 
 	<main class="main">
 		<section class="hero">
-			<h1 class="hero-title">Error 404!</h1>
-			<p class="hero-sub">Looks like that page doesn't exist, sorry about that :&#40 </p>
+			<div class="content-width">
+				<p class="hero-eyebrow">Error 404</p>
+				<h1 class="hero-title">This page doesn't exist.</h1>
+				<p class="hero-lead">Sorry about that. <a class="text-link" href="index.html">Head back home →</a></p>
+			</div>
 		</section>
 	</main>
 
-	<script src="script.js"></script>
+	<script src="assets/js/script.js?v=2"></script>
 </body>
 </html>

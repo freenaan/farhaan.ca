@@ -4,102 +4,147 @@
 	<script defer src="https://cloud.umami.is/script.js" data-website-id="36ced0df-3565-4658-b6f6-ca6fb89aaf49"></script>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="theme-color" content="#08080a">
+	<meta name="description" content="Farhaan Khan — Mechatronics Engineering student at the University of Waterloo building robots, mechanisms, and embedded systems.">
 	<title>farhaan.ca</title>
-	<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="styles.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/styles.css?v=15">
 </head>
-<body>
-	<!-- starfield layers (generated shadows) -->
+<body class="home">
+	<!-- Original starfield layers (generated shadows, same as every other
+	     page), plus a galaxy backdrop that sits behind them. On this page
+	     only, the stars' CSS animation is disabled (body.home #stars
+	     {animation: none} in styles.css) and cosmic-field.js drives all of
+	     these layers' transforms directly every frame instead — the galaxy
+	     at a fraction of the stars' own speed, since it reads as much
+	     farther away. -->
+	<div class="hero-galaxy-glow" aria-hidden="true"></div>
+	<div class="hero-galaxy" aria-hidden="true">
+		<img src="assets/images/hero/galaxy.png" alt="">
+	</div>
 	<div id="stars" aria-hidden="true"></div>
 	<div id="stars2" aria-hidden="true"></div>
 	<div id="stars3" aria-hidden="true"></div>
+
 	<header class="site-header">
-		<div class="site-inner">
-			<div class="brand"><a href="#">Farhaan.ca</a></div>
+		<div class="site-inner content-width">
+			<a class="brand" href="#top">Farhaan.ca</a>
 			<nav class="nav">
-				<a class="btn" href="#projects">Projects</a>
-				<a class="btn" href="contact.html">Contact</a>
+				<a class="nav-link" href="#projects">Projects</a>
+				<a class="nav-link" href="contact.html">Contact</a>
 			</nav>
 		</div>
 	</header>
 
-	<main class="main">
+	<main class="main" id="top">
 		<section class="hero">
-			<h1 class="hero-title">How's it going?</h1>
+			<div class="content-width">
+				<div class="hero-text">
+					<p class="hero-eyebrow">Hey, I'm Farhaan</p>
+					<h1 class="hero-title">I like making robots.</h1>
+					<p class="hero-lead">uWaterloo / MTE</p>
+				</div>
+			</div>
 		</section>
 
-		<!-- About heading sits above the panel -->
-		<section id="about" class="about">
-			<h2>About me</h2>
+		<section id="about" class="section">
+			<div class="content-width">
+				<h2 class="section-heading">About me</h2>
+				<div class="card about-panel">
+					<p>Hi there, I’m Farhaan and I study Mechatronics Engineering at the University of Waterloo.
+						My current interests are humanoid robotics and 3D CAD. I love thinking outside the box
+						with creative (and occasionally janky) solutions to problems I see around me. I’m also
+						into powerlifting, I’ve been training for the past 3 years and hope to attend my first
+						meet sometime soon. Feel free to send me a message if you wanna chat!</p>
+				</div>
+			</div>
 		</section>
 
-		</main>
+		<section id="projects" class="section">
+			<div class="content-width">
+				<h2 class="section-heading">My Stuff:</h2>
+				<div class="proj-grid">
+					<a class="card project-card" href="projects/pioneer-humanoid.html">
+						<div class="project-card-media">
+							<img src="assets/images/pioneer/pioneer0.png" alt="Pioneer Humanoid Robot">
+						</div>
+						<div class="project-card-body">
+							<h3 class="project-card-title">Pioneer Humanoid Robot</h3>
+							<p class="project-card-meta">Bimanual arms, synthetic datagen, and VR teleop for a life-sized humanoid</p>
+						</div>
+					</a>
+					<a class="card project-card" href="projects/planetary-transmission.html">
+						<div class="project-card-media">
+							<img src="assets/images/planetary/planetary1.png" alt="3-Speed Planetary Transmission">
+						</div>
+						<div class="project-card-body">
+							<h3 class="project-card-title">3-Speed Planetary Transmission</h3>
+							<p class="project-card-meta">3D-printed, clutchless planetary gearbox</p>
+						</div>
+					</a>
+					<a class="card project-card" href="projects/shaurya-sumobot.html">
+						<div class="project-card-media">
+							<img src="assets/images/shaurya/shaurya3.png" alt="Shaurya the Sumobot">
+						</div>
+						<div class="project-card-body">
+							<h3 class="project-card-title">Shaurya the Sumobot</h3>
+							<p class="project-card-meta">Autonomous sumobot with dual-ultrasonic target tracking</p>
+						</div>
+					</a>
+					<a class="card project-card" href="projects/8-bit-calculator.html">
+						<div class="project-card-media">
+							<img src="assets/images/calculator/calculator0.png" alt="8-Bit Calculator">
+						</div>
+						<div class="project-card-body">
+							<h3 class="project-card-title">8-Bit Calculator</h3>
+							<p class="project-card-meta">Gate-level 8-bit ALU built from logic gates</p>
+						</div>
+					</a>
+					<!--
+					<a class="card project-card" href="projects/smart-clothesline.html">
+						<div class="project-card-media">
+							<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%23333'/><text x='50%' y='50%' fill='%23fff' font-size='20' dominant-baseline='middle' text-anchor='middle'>Smart+Clothesline</text></svg>" alt="IoT Enabled Smart Clothesline">
+						</div>
+						<div class="project-card-body">
+							<h3 class="project-card-title">IoT Enabled Smart Clothesline</h3>
+							<p class="project-card-meta">Weather-aware, automated clothesline</p>
+						</div>
+					</a>
+					<a class="card project-card" href="projects/tkom.html">
+						<div class="project-card-media">
+							<img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%23333'/><text x='50%' y='50%' fill='%23fff' font-size='24' dominant-baseline='middle' text-anchor='middle'>TKOM</text></svg>" alt="TKOM">
+						</div>
+						<div class="project-card-body">
+							<h3 class="project-card-title">TKOM</h3>
+							<p class="project-card-meta"></p>
+						</div>
+					</a>
+					-->
+					<a class="card project-card" href="projects/basketball-robot.html">
+						<div class="project-card-media">
+							<img src="assets/images/basketball/basketball0.jpg" alt="Closed-Loop Basketball Bot">
+						</div>
+						<div class="project-card-body">
+							<h3 class="project-card-title">Closed-Loop Basketball Bot</h3>
+							<p class="project-card-meta">Closed-loop VEX robot that recycles its own balls</p>
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
 
-	<script src="script.js"></script>
+		<footer class="site-footer">
+			<div class="content-width footer-inner">
+				<p>© 2026 Farhaan Khan</p>
+				<a class="nav-link" href="contact.html">Get in touch</a>
+			</div>
+		</footer>
+	</main>
+
+	<script src="assets/js/script.js?v=4"></script>
+	<script src="assets/js/cosmic-field.js?v=7"></script>
+	<script src="assets/js/flying-artifacts.js?v=1"></script>
 </body>
-	<!-- Moved .panel here so it can be full-bleed and independent of .main -->
-	<!-- About box moved out here so it can be its own independent block -->
-	<div class="about-box">
-		<p>Hi there, I’m Farhaan and I study Mechatronics Engineering at the University of Waterloo. 
-			My current interests are embedded systems and 3D CAD. I love thinking outside the box 
-			with creative (and occasionally janky) solutions to problems I see around me. I’m also 
-			into powerlifting, I’ve been training for the past 2 years and hope to attend my first 
-			meet sometime soon. Feel free to send me a message if you wanna chat!</p>
-	</div>
-
-	<div class="panel">
-		<div class="panel-inner">
-
-			<section id="projects" class="projects">
-				<div class="projects-inner">
-					<h2>My Stuff:</h2>
-					<div class="proj-grid">
-					<div class="proj-container">
-					<a href="projects/planetary-transmission.html">
-						<div class="proj-item"><img src="projects/planetary1.png" alt="3-Speed Planetary Transmission"/></div>
-					</a>
-					<a href="projects/planetary-transmission.html" class="proj-label">3-Speed Planetary Transmission</a>
-				</div>
-				<div class="proj-container">
-					<a href="projects/shaurya-sumobot.html">
-						<div class="proj-item"><img src="projects/shaurya3.png" alt="Shaurya the Sumobot"/></div>
-					</a>
-					<a href="projects/shaurya-sumobot.html" class="proj-label">Shaurya the Sumobot</a>
-				</div>
-				<div class="proj-container">
-					<a href="projects/8-bit-calculator.html">
-						<div class="proj-item"><img src="projects/calculator0.png" alt="Shaurya the Sumobot"/></div>
-					</a>
-					<a href="projects/8-bit-calculator.html" class="proj-label">8-Bit Calculator</a>
-				</div>
-				<!--
-				<div class="proj-container">
-					<a href="projects/smart-clothesline.html">
-						<div class="proj-item"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%23333'/><text x='50%' y='50%' fill='%23fff' font-size='20' dominant-baseline='middle' text-anchor='middle'>Smart+Clothesline</text></svg>" alt="IoT Enabled Smart Clothesline"/></div>
-					</a>
-					<a href="projects/smart-clothesline.html" class="proj-label">IoT Enabled Smart Clothesline</a>
-				</div>
-				-->
-				<!--
-				<div class="proj-container">
-					<a href="projects/tkom.html">
-						<div class="proj-item"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%23333'/><text x='50%' y='50%' fill='%23fff' font-size='24' dominant-baseline='middle' text-anchor='middle'>TKOM</text></svg>" alt="TKOM"/></div>
-					</a>
-					<a href="projects/tkom.html" class="proj-label">TKOM</a>
-				</div>
-				-->
-				<div class="proj-container">
-					<a href="projects/basketball-robot.html">
-						<div class="proj-item"><img src="projects/basketball0.jpg" alt="Closed-Loop Basketball Bot"/></div>
-					</a>
-					<a href="projects/basketball-robot.html" class="proj-label">Closed-Loop Basketball Bot</a>
-				</div>
-				</div>
-				</div>
-			</section>
-		</div>
-	</div>
 </html>
-

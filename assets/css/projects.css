@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+/*
+	projects.css - project detail pages
+
+	Loaded after styles.css, so it inherits every design token (colors,
+	spacing, type scale) from that file's :root. Only page-specific layout
+	(fixed zooming hero image, stacked feature cards) lives here.
+*/
+
+body {
+	background: var(--color-bg);
+	color: var(--color-text);
+	position: relative;
+}
+
+/* Fixed, slowly-zooming hero image behind the page content */
+.project-hero {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-size: 115%;
+	background-position: center center;
+	background-repeat: no-repeat;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 0;
+	color: var(--color-text);
+	text-align: center;
+	box-shadow: 0 -50px 20px -20px var(--color-bg-alt) inset;
+}
+
+/* Hero photos vary wildly in brightness, so the nav needs a guaranteed-dark
+   scrim behind it rather than relying on text color/shadow alone against
+   whatever the photo happens to show. This lives on .project-hero itself
+   (full viewport width) rather than on .site-inner, which is capped at
+   --content-width and centered — scoping the scrim to that box left a
+   truncated dark rectangle over the nav instead of a full-width bar. */
+.project-hero::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: calc(var(--header-height) * 2.2);
+	background: linear-gradient(180deg, rgba(5, 5, 6, 0.7) 0%, rgba(5, 5, 6, 0.55) 60%, rgba(5, 5, 6, 0) 100%);
+	z-index: 1;
+	pointer-events: none;
+}
+
+.project-hero .site-inner {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: var(--header-height);
+	padding-inline: var(--space-4);
+	box-sizing: border-box;
+	z-index: 3;
+}
+
+.project-hero .brand,
+.project-hero .nav-link {
+	color: var(--color-text);
+}
+
+.project-hero .nav-link:hover { color: var(--color-accent); background-color: transparent; }
+
+.project-hero h1 {
+	position: relative;
+	z-index: 2;
+	font-weight: 600;
+	font-size: clamp(1.75rem, 1.2rem + 2.6vw, 3rem);
+	letter-spacing: -0.01em;
+	line-height: 1.15;
+	margin: 0;
+	transition: opacity 200ms linear, transform 200ms linear;
+	text-shadow:
+		0 1px 0 rgba(0, 0, 0, 0.95),
+		0 -1px 0 rgba(0, 0, 0, 0.95),
+		1px 0 0 rgba(0, 0, 0, 0.95),
+		-1px 0 0 rgba(0, 0, 0, 0.95),
+		1px 1px 8px rgba(0, 0, 0, 0.6);
+	background: rgba(8, 8, 10, 0.45);
+	padding: 0.3em 0.7em;
+	display: inline-block;
+}
+
+/* opaque overlay used for non-Chrome/Safari browsers (background-size zoom
+   isn't well supported there); matches the page background, not a random
+   accent color */
+.opaque { position: absolute; inset: 0; opacity: 0; background: var(--color-bg); pointer-events: none; }
+
+/* content flows over the fixed hero image. background-color stays fully
+   opaque (the hero is position:fixed and must be completely hidden once
+   scrolled past), but two low-opacity nebula blobs — same amber/cool-grey
+   pair as the main site — sit on top of it, pinned near the left/right
+   viewport edges at vertical-center via background-attachment: fixed. That
+   attachment ties their position to the viewport rather than the (very
+   tall) content box, so they stay put in the empty side margins at any
+   scroll depth instead of scrolling past like a normal background would. */
+.project-content {
+	margin-top: 100vh;
+	/* flow-root establishes a new block formatting context so a negative
+	   margin further down the tree (.case-panel's chevron peek) can't
+	   collapse through .project-inner and this element and drag the whole
+	   opaque box — and the hero-fade scroll math tied to it — up with it. */
+	display: flow-root;
+	position: relative;
+	z-index: 1;
+	background-color: var(--color-bg-alt);
+	background-image:
+		radial-gradient(38% 55% at 6% 45%, rgba(217, 161, 91, 0.12), transparent 70%),
+		radial-gradient(38% 55% at 94% 58%, rgba(140, 150, 190, 0.10), transparent 70%);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	padding-block: 0 var(--space-7);
+	padding-inline: var(--space-4);
+	min-height: 100vh;
+	box-sizing: border-box;
+}
+
+.project-inner {
+	max-width: var(--content-width);
+	margin-inline: auto;
+}
+
+.back-link {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-1);
+	color: var(--color-text-muted);
+	text-decoration: none;
+	font-size: var(--text-sm);
+	font-weight: 500;
+	margin-bottom: var(--space-6);
+	transition: color var(--duration) var(--ease);
+}
+
+.back-link:hover { color: var(--color-accent); }
+
+/* Case-study body copy. Each topic is a text/image row: a narrower prose
+   column beside a wider figure, top-aligned rather than stretched to equal
+   height (that stretch was what made the old layout feel like two locked
+   puzzle pieces). No border, no radius, no card background on the image —
+   it sits flush on the page. */
+
+/* The whole case-list (and the back-link above it) sits inside one
+   continuous, very shallow chevron: a
+   flat grey panel (vs. the plain black of .project-content around it) whose
+   top edge rises to a single wide, flat point at center rather than running
+   straight across. .project-content itself has zero top padding so this
+   panel's un-shifted top would land exactly on the 100vh line where the
+   fixed hero ends; the panel's negative margin-top then pulls it up by
+   exactly its own peak height, so only the point intrudes above that line,
+   which is what lets it peek above the fold on first load. Width/position
+   of the text and images inside are untouched: the panel is exactly as wide
+   as .project-inner already was, and its own top padding reproduces the
+   breathing room .project-content used to provide before the back-link. */
+.case-panel {
+	--chevron-peak: 100px;
+	position: relative;
+	margin-top: calc(-1 * var(--chevron-peak));
+	padding: calc(var(--chevron-peak) + var(--space-5)) var(--space-5) 0;
+	background: #18181b;
+	clip-path: polygon(0% var(--chevron-peak), 50% 0%, 100% var(--chevron-peak), 100% 100%, 0% 100%);
+	-webkit-clip-path: polygon(0% var(--chevron-peak), 50% 0%, 100% var(--chevron-peak), 100% 100%, 0% 100%);
+}
+
+.case-list {
+	display: flex;
+	flex-direction: column;
+}
+
+.case-section {
+	padding-block: var(--space-8);
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-5);
+}
+
+.case-list > .case-section:first-child {
+	padding-top: var(--space-6);
+}
+
+.case-list > .case-section + .case-section {
+	border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: 720px) {
+	.case-panel { --chevron-peak: 52px; }
+}
+
+.case-section h3 {
+	font-weight: 600;
+	font-size: var(--text-xl);
+	letter-spacing: -0.01em;
+	line-height: 1.25;
+	color: var(--color-text);
+	max-width: 34ch;
+}
+
+.case-row {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--space-6);
+}
+
+.case-row.reverse { flex-direction: row-reverse; }
+
+.case-row + .case-row { margin-top: var(--space-5); }
+
+.case-text {
+	flex: 1 1 320px;
+	max-width: 40ch;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-4);
+}
+
+.case-text p {
+	margin: 0;
+	line-height: 1.7;
+	font-size: var(--text-md);
+	color: var(--color-text-muted);
+}
+
+/* The one deliberate bold moment allowed per page: an existing result
+   pulled out at display size, inline in the sentence that already states
+   it, rather than a separate stat-card component. */
+.case-text .stat {
+	font-family: var(--font-display);
+	font-weight: 600;
+	font-size: 1.5em;
+	color: var(--color-text);
+	letter-spacing: -0.01em;
+}
+
+.case-figure {
+	flex: 1 1 420px;
+	margin: 0;
+	min-width: 0;
+}
+
+.case-figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.case-figure figcaption {
+	margin-top: var(--space-3);
+	font-size: var(--text-xs);
+	line-height: 1.5;
+	color: var(--color-text-faint);
+}
+
+@media (max-width: 800px) {
+	.case-row, .case-row.reverse { flex-direction: column; }
+}
+
+@media (max-width: 720px) {
+	.case-section { padding-block: var(--space-6); gap: var(--space-4); }
+}
+
+.project-footer {
+	text-align: center;
+	padding-top: var(--space-6);
+	padding-bottom: var(--space-6);
+	margin-top: var(--space-6);
+	border-top: 1px solid var(--color-border);
+	color: var(--color-text-faint);
+	font-size: var(--text-sm);
+}

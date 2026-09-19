@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="36ced0df-3565-4658-b6f6-ca6fb89aaf49"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Pioneer Humanoid Robot</title>
+  <link rel="stylesheet" href="../assets/css/styles.css?v=15">
+  <link rel="stylesheet" href="../assets/css/projects.css?v=7">
+  <style>
+    /* Page-specific only: a handful of figures on this page read too large
+       at the shared .case-figure flex-basis, so they're capped smaller here.
+       The sibling .case-text in these same rows drops its 40ch cap and
+       grows (flex-grow:1, already set by the shared stylesheet) to fill
+       exactly the freed-up space, so the row still divides at the standard
+       gap — text expands to meet the smaller image at the same distance
+       every other project page uses, instead of leaving dead space or
+       needing an auto-margin hack to push the figure to the row's edge. */
+    .case-figure.figure-compact { flex: 0 1 390px; }
+    .case-row .text-expand { max-width: none; }
+    /* Page-specific: the shared .case-row aligns text to the top of the
+       figure, which reads fine when both are close in height but leaves a
+       lot of dead space below shorter text blocks here. Centering vertically
+       keeps text and image balanced regardless of either one's length. */
+    .case-row { align-items: center; }
+    @media (max-width: 800px) {
+      .case-figure.figure-compact { flex-basis: auto; }
+      .case-row .text-expand { max-width: 40ch; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="project-hero" style="background-image: url('../assets/images/pioneer/pioneer1.jpg')">
+      <div class="site-inner content-width">
+        <a class="brand" href="../index.html">Farhaan.ca</a>
+        <nav class="nav">
+          <a class="nav-link" href="../index.html#projects">Projects</a>
+          <a class="nav-link" href="../contact.html">Contact</a>
+        </nav>
+      </div>
+      <h1 class="anim-1">Pioneer Humanoid Robot</h1>
+    </section>
+
+    <section class="project-content">
+      <div class="project-inner">
+        <div class="case-panel">
+        <a class="back-link" href="../index.html#projects">← All projects</a>
+        <div class="case-list">
+          <div class="case-section">
+            <h3>Overview</h3>
+            <div class="case-row">
+              <div class="case-text text-expand">
+                <p>Humanoid robotics is usually a graduate-level research topic. It takes fields like ML, simulation, and mechanical design, turns up the difficulty, and squeezes them all together. But they’re just too cool not to build, so I decided to try and make one anyway.</p>
+                <p>That’s why I joined WATonomous Humanoid, to help prove that a few questionably trained undergrads can make a <strong>life-sized humanoid</strong> capable of walking and interacting with the world all on its own. During my co-op I designed and manufactured two revisions of our bimanual arm, designed an automatic synthetic data generation pipeline for imitation learning, and architected the power system to drive our (very power hungry) actuators.</p>
+              </div>
+              <figure class="case-figure figure-compact">
+                <img src="../assets/images/pioneer/pioneer0.png" alt="Rendered CAD model of the bimanual arm assembly" loading="lazy">
+                <figcaption>The bimanual arm assembly, rendered on its test stand.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="case-section">
+            <h3>6DOF Arm(s)</h3>
+            <div class="case-row reverse">
+              <div class="case-text text-expand">
+                <p>Even the most robust RL policies mean nothing without hardware to deploy it on. Our simulation team was going strong by the time I joined, but our hardware was extremely limited: two fingers and a few fragile shoulder parts. To fix this, I <strong>finalized ArmV1</strong> along with a rudimentary wiring harness. Despite the scrappy appearance, this arm was deceptively strong. We had multiple uncontrolled inverse-kinematics deployments on it, one of which ripped the threads right out of an actuator before the 3D-printed PLA shoulder gave way. It still had real issues though, including bending moments at the actuator and its overall visual appeal.</p>
+              </div>
+              <figure class="case-figure figure-compact">
+                <img src="../assets/images/pioneer/pioneer2.gif" alt="ArmV1 prototype with exposed wiring harness" loading="lazy">
+                <figcaption>ArmV1, exposed wiring harness and all. Scrappy, but strong enough to strip an actuator's own threads.</figcaption>
+              </figure>
+            </div>
+            <div class="case-row">
+              <div class="case-text text-expand">
+                <p>Enter <strong>ArmV2</strong>, a ground-up redesign that adds <strong>straddle support</strong> (a bearing opposite the rotor) and <strong>integrated spider couplings</strong> (for angular deflection) to the major joints, preventing bending moments from damaging screw threads or internal bearings; dedicated anchor points that eliminate wire snag and enable high-ROM manipulation; and, frankly, just looks better than before.</p>
+                <p>It still isn’t perfect. Next term’s plans include fully internal cable routing, a subframe, and a proper surface finish, but for now it’s a genuinely usable bimanual arm system that can run manipulation tasks.</p>
+              </div>
+              <figure class="case-figure figure-compact">
+                <img src="../assets/images/pioneer/pioneer3.png" alt="ArmV2 bimanual arms mounted on the Pioneer stand" loading="lazy">
+                <figcaption>ArmV2 on Pioneer's stand. Straddle-supported joints and integrated spider couplings replace V1's exposed wiring.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="case-section">
+            <h3>CuRobo Synthetic Datagen + ACT Policy</h3>
+            <div class="case-row reverse">
+              <div class="case-text text-expand">
+                <p>Manual demos are a pain, so why not automate it? I paired Nvidia’s CuRobo collision-free motion planner with privileged simulation ground-truth states to procedurally generate the arm’s trajectory, all dockerized on Linux. To ensure robustness, I added heavy <strong>domain randomization</strong> (arm sag, offset position recovery, jittery actuators and sensors) for recovery experience outside nominal trajectories.</p>
+              </div>
+              <figure class="case-figure figure-compact">
+                <img src="../assets/images/pioneer/pioneer4.gif" alt="CuRobo simulated pick-and-place trajectory planning" loading="lazy">
+                <figcaption>CuRobo planning a collision-free pick-and-place trajectory, the basis for the synthetic dataset.</figcaption>
+              </figure>
+            </div>
+            <div class="case-row">
+              <div class="case-text text-expand">
+                <p>Using this, I trained a visuomotor policy that completes the pick-and-place task in sim. An ACT policy was chosen because action chunking adds a look-ahead horizon that predicts the next steps and reduces jitter. For future iterations I could move from discrete waypoints to a more continuous trajectory, since policies generally handle smoother gradients and motion better.</p>
+              </div>
+              <figure class="case-figure figure-compact">
+                <img src="../assets/images/pioneer/pioneer5.gif" alt="ArmV1 hardware, the target platform for the trained policy" loading="lazy">
+                <figcaption>ArmV1 running pick-and-place ACT policy in sim.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="case-section">
+            <h3>VR Teleop</h3>
+            <div class="case-row reverse">
+              <div class="case-text">
+                <p>Simulation data handles the basics, but generalizing to messy real-world tasks needs human intuition. Our baseline VR teleop stack ran at an unusable 0.14 real-time factor (RTF), so I took over the pipeline to make it fluid enough for real data collection. It streams WebXR spatial packets from a Meta Quest 2 over JSON to a C++ node, which translates them into ROS2 positions subscribed to by Nvidia Isaac Sim, all containerized with Docker on Linux.</p>
+              </div>
+              <figure class="case-figure">
+                <img src="../assets/images/pioneer/pioneer6.gif" alt="First-person view from the humanoid during a VR teleop session" loading="lazy">
+                <figcaption>The operator's first-person view during a teleop session, both arms reaching toward the workspace.</figcaption>
+              </figure>
+            </div>
+            <div class="case-row">
+              <div class="case-text">
+                <p>To crush the latency bottleneck, I re-architected the infrastructure. <strong>Container consolidation</strong> collapsed two separate Docker containers into one, killing inter-container network overhead, and <strong>direct tensor access</strong> bypassed the slow image-broadcasting step by reading Isaac Sim’s raw image tensors straight into the VR view. Together, these changes slashed compute time per frame by <span class="stat">~3x</span>, taking us from a lagging 0.14 RTF to a stable, real-time 1.0 RTF with headroom to spare, comfortably fast enough to capture fluid human data for training.</p>
+              </div>
+              <figure class="case-figure">
+                <img src="../assets/images/pioneer/pioneer7.gif" alt="Wrist-mounted camera view used during VR teleop" loading="lazy">
+                <figcaption>The wrist-mounted camera view used for close-in manipulation during teleop.</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-footer">© Farhaan Khan 2026</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+  (function(){
+    var hero = document.querySelector('.project-hero');
+    var title = document.querySelector('.project-hero h1');
+    if(!hero) return;
+
+    var startBg = window.getComputedStyle(hero).backgroundSize || 'cover';
+    var allowResize = startBg.indexOf('%') > -1;
+    var zoomPct = 250;
+    try{
+      if(allowResize) zoomPct = parseFloat(startBg);
+    }catch(e){}
+
+    var baseSize = (zoomPct/100) * hero.offsetWidth;
+    var doc = document.documentElement;
+
+    function onScroll(){
+      var fromTop = Math.max(0, window.scrollY || doc.scrollTop);
+
+      if(allowResize){
+        var newSize = baseSize - (fromTop/3);
+        if(newSize < hero.offsetWidth) newSize = hero.offsetWidth;
+        hero.style.backgroundSize = newSize + 'px';
+      }
+
+      var blur = Math.min(12, fromTop/100);
+      hero.style.filter = 'blur(' + blur + 'px)';
+
+      var opacity = 1 - ((fromTop / (doc.scrollHeight||document.body.scrollHeight)) * 1.3);
+      opacity = Math.max(0, Math.min(1, opacity));
+      hero.style.opacity = opacity;
+
+      if(title){
+        var maxFade = 300;
+        var t = Math.max(0, 1 - fromTop / maxFade);
+        title.style.opacity = t;
+        var scale = 1 - (1 - t) * 0.04;
+        title.style.transform = 'scale(' + scale + ')';
+      }
+    }
+
+    var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+    var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+    if(!(isChrome || isSafari)){
+      var o = document.createElement('div');
+      o.className = 'opaque';
+      hero.appendChild(o);
+      window.addEventListener('scroll', function(){
+        var op = Math.min(1, (window.scrollY||0)/5000);
+        o.style.opacity = op;
+      }, { passive: true });
+    }
+
+    // Scroll fires far more often than the display can paint, and each
+    // onScroll() call writes several styles (filter, background-size,
+    // opacity) that force a repaint — running it unthrottled can call it
+    // many times per frame. Coalescing to one call per animation frame
+    // keeps the same visual result at a fraction of the work.
+    var scrollTicking = false;
+    function requestScrollTick(){
+      if (!scrollTicking) {
+        scrollTicking = true;
+        requestAnimationFrame(function(){
+          onScroll();
+          scrollTicking = false;
+        });
+      }
+    }
+
+    window.addEventListener('scroll', requestScrollTick, { passive: true });
+    onScroll();
+  })();
+  </script>
+
+  <script src="../assets/js/script.js?v=2"></script>
+
+  <script>
+  (function(){
+    // This page has five simultaneously-animating GIFs, and an animated
+    // GIF keeps decoding every frame in the background even while fully
+    // scrolled out of view — that's real, continuous CPU work the browser
+    // can't optimize away on its own, and it's the main cause of scroll
+    // jank here (independent of the hero's own scroll handler, fixed
+    // above). Unloading a GIF's src while it's off-screen stops that
+    // decode work entirely; restoring the same src when it scrolls back
+    // into view resumes it (from its first frame — a fixed local file
+    // reloads from the browser cache instantly, so there's no network
+    // cost, just a restart of the animation).
+    if (!('IntersectionObserver' in window)) return; // no-op fallback: GIFs just always play, as before
+
+    var gifs = document.querySelectorAll('.case-figure img[src$=".gif"]');
+    if (!gifs.length) return;
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        var img = entry.target;
+        if (entry.isIntersecting) {
+          if (!img.getAttribute('src')) img.setAttribute('src', img.dataset.gifSrc);
+        } else {
+          if (img.getAttribute('src')) {
+            img.dataset.gifSrc = img.getAttribute('src');
+            img.removeAttribute('src');
+          }
+        }
+      });
+    }, { rootMargin: '200px 0px' }); // preload/resume slightly before entering view
+
+    gifs.forEach(function(img){ io.observe(img); });
+  })();
+  </script>
+
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="36ced0df-3565-4658-b6f6-ca6fb89aaf49"></script>
+</body>
+</html>
