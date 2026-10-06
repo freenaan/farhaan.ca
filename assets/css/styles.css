@@ -584,11 +584,16 @@ body.home #stars3 {
 
 /* The galaxy is a fixed, page-wide backdrop, not something confined to the
    hero section — it needs to sit behind the stars on every scroll position,
-   the same way the stars themselves are a fixed full-page layer. A negative
-   z-index keeps it behind #stars/#stars2/#stars3 (z-index 0) while still
-   painting above the body's own background gradient (stacking contexts
-   always paint their own background first, before negative-z-index
-   descendants). cosmic-field.js applies the actual scroll-linked drift. */
+   the same way the stars themselves are a fixed full-page layer. It relies
+   on DOM order rather than a negative z-index to stay behind #stars/#stars2/
+   #stars3 (both share z-index:0; the stars simply come later in the HTML
+   and so paint on top) — iOS WebKit (both Safari and Chrome, which is just
+   a WebKit shell there) has a long-documented family of bugs combining
+   position:fixed with a negative z-index, and separately with CSS filter on
+   a transparent image, that can flatten alpha to a solid white box. Using
+   z-index:0 plus the translateZ/backface-visibility hack below, and no
+   filter on the actual PNG (see .hero-galaxy img), sidesteps both at once.
+   cosmic-field.js applies the actual scroll-linked drift via transform. */
 .hero-galaxy-glow,
 .hero-galaxy {
 	position: fixed;
@@ -596,15 +601,19 @@ body.home #stars3 {
 	right: -18vw;
 	width: 66vw;
 	height: 66vw;
-	z-index: -1;
+	z-index: 0;
 	pointer-events: none;
 	will-change: transform;
+	-webkit-transform: translateZ(0);
+	-webkit-backface-visibility: hidden;
 }
 
 /* Warm ambient bleed behind the galaxy — a blurred radial gradient in the
    same restrained amber used elsewhere on the site, not a hard CSS glow
    ring. Slightly larger than the galaxy itself so it reads as haze around
-   the artwork rather than a halo with a hard edge. */
+   the artwork rather than a halo with a hard edge. This is a plain CSS
+   gradient (not a decoded raster image), so it isn't affected by the PNG
+   alpha/filter bug described above and can keep its own blur filter. */
 .hero-galaxy-glow {
 	width: 72vw;
 	height: 72vw;
@@ -612,16 +621,18 @@ body.home #stars3 {
 	filter: blur(70px);
 }
 
-/* Reduced opacity + a soft blur is what sells "distant and ethereal"
-   instead of a flat sticker pasted over the stars — a fully-opaque crisp
-   PNG at this size would read as a foreground graphic, not a backdrop. */
+/* No CSS filter here on purpose — iOS WebKit has a documented bug where a
+   `filter` (even blur(0)/drop-shadow) applied to a GPU-composited,
+   transparent PNG can flatten its alpha channel to solid white instead of
+   leaving it transparent. The glow/haze effect still comes through via the
+   separate .hero-galaxy-glow gradient behind this image, which doesn't
+   carry the same risk since it isn't a raster image. */
 .hero-galaxy img {
 	width: 100%;
 	height: 100%;
 	object-fit: contain;
 	display: block;
 	opacity: 1;
-	filter: blur(0px) drop-shadow(0 0 40px rgba(217, 161, 91, 0.18));
 }
 
 /* ---------- flying project artifacts ---------- */
